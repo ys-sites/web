@@ -251,7 +251,7 @@ const HeroSection = memo(function HeroSection() {
                 alt="Iron Fuel Lab" 
                 className="hidden md:block w-8 h-8 object-contain" 
               />
-              <span className="text-[11px] md:text-[13px] lg:text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
+              <span className="text-[11px] md:text-[15px] lg:text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
                 IRON FUEL LAB
               </span>
             </div>
@@ -367,7 +367,7 @@ const HeroSection = memo(function HeroSection() {
                 animateBy="words"
                 highlightWord={t.hero[slide.highlightWord.toLowerCase() as keyof typeof t.hero] || slide.highlightWord}
                 highlightColor={slide.highlightColor}
-                className="text-[2.1rem] sm:text-[2.5rem] md:text-[3.8rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
+                className="text-[2.4rem] sm:text-[2.5rem] md:text-[3.2rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
               />
             </div>
           ))}
@@ -391,25 +391,25 @@ const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* ── Review / Brand Card ───────────────────────────────── */}
-        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[150px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-2.5 sm:p-3 md:p-4 lg:p-7 rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1 sm:space-y-2 lg:space-y-4">
-          <div className="flex items-center gap-1.5 sm:gap-3 lg:gap-5">
-            <div className="flex -space-x-1.5 sm:-space-x-3 lg:-space-x-4">
-              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full border-[1px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full border-[1px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full border-[1px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[180px] sm:max-w-[180px] md:max-w-[200px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3.5 sm:p-3 md:p-3.5 lg:p-7 rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1.5 sm:space-y-1.5 lg:space-y-4">
+          <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-5">
+            <div className="flex -space-x-2 sm:-space-x-2.5 lg:-space-x-4">
+              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 lg:w-14 lg:h-14 rounded-full border-[1.5px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 lg:w-14 lg:h-14 rounded-full border-[1.5px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-9 md:h-9 lg:w-14 lg:h-14 rounded-full border-[1.5px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
             </div>
             <div>
               <div className="flex gap-0.5 sm:gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-1.5 h-1.5 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-6 lg:h-6 text-amber-400 fill-current" />
+                  <Star key={i} className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3.5 md:h-3.5 lg:w-6 lg:h-6 text-amber-400 fill-current" />
                 ))}
               </div>
-              <div className="text-[8px] sm:text-[12px] md:text-sm lg:text-lg text-white mt-0.5 font-bold font-display leading-tight">
+              <div className="text-[10px] sm:text-[11px] md:text-[13px] lg:text-lg text-white mt-0.5 font-bold font-display leading-tight">
                 {t.hero.reviews}
               </div>
             </div>
           </div>
-          <p className="text-[7px] sm:text-[11px] md:text-[13px] lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
+          <p className="text-[9px] sm:text-[10px] md:text-[12px] lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
             {HERO_SLIDES[currentSlide].review[language as keyof typeof HERO_SLIDES[0]["review"]]}
           </p>
         </div>
