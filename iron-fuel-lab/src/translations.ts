@@ -27,7 +27,10 @@ export const translations = {
       clarity: "CLARITY",
       optimal: "OPTIMAL",
       health: "HEALTH",
-      energy: "ENERGY"
+      energy: "ENERGY",
+      core: "CORE",
+      restore: "RESTORE",
+      balance: "BALANCE"
     },
     products: {
       title: "OUR PRODUCTS",
@@ -113,7 +116,10 @@ export const translations = {
       clarity: "CLARTÉ",
       optimal: "OPTIMAL",
       health: "SANTÉ",
-      energy: "ÉNERGIE"
+      energy: "ÉNERGIE",
+      core: "CŒUR",
+      restore: "RESTAURER",
+      balance: "ÉQUILIBRE"
     },
     products: {
       title: "NOS PRODUITS",
