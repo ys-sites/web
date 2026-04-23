@@ -48,10 +48,10 @@ export default function Footer() {
               <img
                 src="/iron.png"
                 alt="Iron Fuel Lab"
-                className="w-12 h-12 lg:w-14 lg:h-14 object-contain rounded-full ring-1 ring-white/10 group-hover:ring-[#4ca735]/60 transition-all duration-300"
+                className="w-14 h-14 lg:w-16 lg:h-16 object-contain rounded-full ring-1 ring-white/10 group-hover:ring-[#4ca735]/60 transition-all duration-300"
               />
-              <span className="text-3xl lg:text-4xl font-black tracking-tighter italic uppercase leading-none text-white">
-                IRON FUEL<br />LAB.
+              <span className="text-2xl lg:text-3xl font-black tracking-tighter italic uppercase leading-none text-white whitespace-nowrap">
+                IRON FUEL LAB.
               </span>
             </button>
 

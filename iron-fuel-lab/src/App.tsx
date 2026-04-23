@@ -246,7 +246,7 @@ const HeroSection = memo(function HeroSection() {
 
             {/* Brand logo */}
             <div className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none select-none">
-              <img src="/iron.png" alt="Iron Fuel Lab" className="w-7 h-7 md:w-9 md:h-9 object-contain rounded-full" />
+              <img src="/iron.png" alt="Iron Fuel Lab" className="w-9 h-9 md:w-11 md:h-11 object-contain rounded-full" />
               <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter font-display text-white whitespace-nowrap">
                 IRON FUEL LAB.
               </span>
@@ -446,7 +446,7 @@ const HeroSection = memo(function HeroSection() {
               {/* Menu header */}
               <div className="flex items-center justify-between mb-10">
                 <div className="flex items-center gap-2">
-                  <img src="/iron.png" alt="Iron Fuel Lab" className="w-7 h-7 object-contain rounded-full" />
+                  <img src="/iron.png" alt="Iron Fuel Lab" className="w-9 h-9 object-contain rounded-full" />
                   <span className="text-white text-xl font-black tracking-tighter font-display">
                     IRON FUEL LAB.
                   </span>
