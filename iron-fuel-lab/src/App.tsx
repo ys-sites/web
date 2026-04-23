@@ -249,7 +249,7 @@ const HeroSection = memo(function HeroSection() {
               <img 
                 src="/logo.png" 
                 alt="Iron Fuel Lab" 
-                className="w-12 h-12 md:w-16 md:h-16 object-contain rounded-full shadow-2xl p-1.5 bg-white/10 backdrop-blur-md ring-1 ring-white/20" 
+                className="w-12 h-12 md:w-16 md:h-16 object-contain" 
               />
               <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter font-display text-white whitespace-nowrap">
                 IRON FUEL LAB.
