@@ -4,7 +4,7 @@
  */
 
 import { ShoppingBag, ArrowUpRight, Star, ChevronLeft, ChevronRight, ArrowRight, Brain, Leaf, Droplet, Sparkles, ShieldCheck, Zap, CheckCircle2, Menu, X, Instagram } from "lucide-react";
-import { useState, useEffect, useMemo, memo, useCallback } from "react";
+import { useState, useEffect, useMemo, memo, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BlurText from "./components/BlurText";
 import Testimonials from "./components/Testimonials";
@@ -672,59 +672,7 @@ const ProductsSection = memo(function ProductsSection() {
   );
 });
 
-const AboutSection = memo(function AboutSection() {
-  const [expandedId, setExpandedId] = useState<string | null>("Organic Ashwagandha");
-  const [itemOrder, setItemOrder] = useState<string[]>([
-    "Organic Ashwagandha",
-    "Lion's Mane Mushroom",
-    "Creatine Hydration",
-    "Digestive Equilibrium",
-    "Pure Isolate Protein",
-  ]);
-
-  const IMAGE_MAP: Record<string, string> = {
-    "Organic Ashwagandha": "/ashwagandha.png",
-    "Lion's Mane Mushroom": "/NeuroFuel.png",
-    "Creatine Hydration": "/FURY Hydrate.png",
-    "Digestive Equilibrium": "/GutFuel.png",
-    "Pure Isolate Protein": "/FURY Isolate.png",
-  };
-
-  const handleItemClick = useCallback((name: string) => {
-    if (expandedId === name) {
-      setExpandedId(null);
-    } else {
-      setItemOrder((prev) => {
-        const next = [...prev].filter((id) => id !== name);
-        if (expandedId) {
-          const withPrev = next.filter((id) => id !== expandedId);
-          withPrev.push(expandedId);
-          withPrev.unshift(name);
-          return withPrev;
-        }
-        next.unshift(name);
-        return next;
-      });
-      setExpandedId(name);
-    }
-  }, [expandedId]);
-
-  const ELEMENT_NAMES = [
-    "Organic Ashwagandha",
-    "Lion's Mane Mushroom",
-    "Creatine Hydration",
-    "Digestive Equilibrium",
-    "Pure Isolate Protein",
-  ];
-
-  const navigateItem = useCallback((dir: 1 | -1) => {
-    const current = expandedId ?? ELEMENT_NAMES[0];
-    const idx = ELEMENT_NAMES.indexOf(current);
-    const next = ELEMENT_NAMES[(idx + dir + ELEMENT_NAMES.length) % ELEMENT_NAMES.length];
-    handleItemClick(next);
-  }, [expandedId, handleItemClick]);
-
-  const elements = [
+const PRODUCT_SPECS = [
     {
       name: "Organic Ashwagandha",
       icon: Leaf,
