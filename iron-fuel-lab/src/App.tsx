@@ -802,13 +802,79 @@ const PRODUCT_SPECS = [
     },
   ];
 
+const AboutSection = memo(function AboutSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const [expandedId, setExpandedId] = useState<string | null>("Organic Ashwagandha");
+  const [itemOrder, setItemOrder] = useState<string[]>([
+    "Organic Ashwagandha",
+    "Lion's Mane Mushroom",
+    "Creatine Hydration",
+    "Digestive Equilibrium",
+    "Pure Isolate Protein",
+  ]);
+
+  const IMAGE_MAP: Record<string, string> = {
+    "Organic Ashwagandha": "/ashwagandha.png",
+    "Lion's Mane Mushroom": "/NeuroFuel.png",
+    "Creatine Hydration": "/FURY Hydrate.png",
+    "Digestive Equilibrium": "/GutFuel.png",
+    "Pure Isolate Protein": "/FURY Isolate.png",
+  };
+
+  const ELEMENT_NAMES = [
+    "Organic Ashwagandha",
+    "Lion's Mane Mushroom",
+    "Creatine Hydration",
+    "Digestive Equilibrium",
+    "Pure Isolate Protein",
+  ];
+
+  const handleItemClick = useCallback((name: string) => {
+    if (expandedId === name) {
+      setExpandedId(null);
+    } else {
+      setItemOrder((prev) => {
+        const next = [...prev].filter((id) => id !== name);
+        if (expandedId) {
+          const withPrev = next.filter((id) => id !== expandedId);
+          withPrev.push(expandedId);
+          withPrev.unshift(name);
+          return withPrev;
+        }
+        next.unshift(name);
+        return next;
+      });
+      setExpandedId(name);
+    }
+  }, [expandedId]);
+
+  const navigateItem = useCallback((dir: number) => {
+    const current = expandedId ?? ELEMENT_NAMES[0];
+    const idx = ELEMENT_NAMES.indexOf(current);
+    const next = ELEMENT_NAMES[(idx + dir + ELEMENT_NAMES.length) % ELEMENT_NAMES.length];
+    handleItemClick(next);
+  }, [expandedId, handleItemClick]);
+
+  const elements = PRODUCT_SPECS;
+
   const sortedElements = useMemo(
     () => [...elements].sort((a, b) => itemOrder.indexOf(a.name) - itemOrder.indexOf(b.name)),
-    [itemOrder]
+    [itemOrder, elements]
   );
 
   return (
-    <section id="about-section" className="font-sans flex flex-col relative w-full">
+    <section ref={sectionRef} id="about-section" className="font-sans flex flex-col relative w-full">
       <div className="bg-[#eff3f0] py-24 md:py-32 px-4 md:px-8 relative overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-20 w-full text-center mt-0 md:-mt-8 mb-4">
           <BlurText
@@ -854,7 +920,7 @@ const PRODUCT_SPECS = [
           <div className="relative z-30 w-full max-w-[80rem] flex flex-col gap-5 px-4 md:px-12 pb-24 mt-12 md:mt-24">
 
             {/* Up / Down nav — fixed to right side */}
-            <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+            <div className={`fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2 transition-all duration-500 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12 pointer-events-none"}`}>
               <button
                 onClick={() => navigateItem(-1)}
                 aria-label="Previous product"
