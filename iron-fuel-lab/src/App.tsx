@@ -709,6 +709,21 @@ const AboutSection = memo(function AboutSection() {
     }
   }, [expandedId]);
 
+  const ELEMENT_NAMES = [
+    "Organic Ashwagandha",
+    "Lion's Mane Mushroom",
+    "Creatine Hydration",
+    "Digestive Equilibrium",
+    "Pure Isolate Protein",
+  ];
+
+  const navigateItem = useCallback((dir: 1 | -1) => {
+    const current = expandedId ?? ELEMENT_NAMES[0];
+    const idx = ELEMENT_NAMES.indexOf(current);
+    const next = ELEMENT_NAMES[(idx + dir + ELEMENT_NAMES.length) % ELEMENT_NAMES.length];
+    handleItemClick(next);
+  }, [expandedId, handleItemClick]);
+
   const elements = [
     {
       name: "Organic Ashwagandha",
@@ -889,6 +904,39 @@ const AboutSection = memo(function AboutSection() {
 
           {/* Accordion items */}
           <div className="relative z-30 w-full max-w-[80rem] flex flex-col gap-5 px-4 md:px-12 pb-24 mt-12 md:mt-24">
+
+            {/* Up / Down nav — fixed to right side */}
+            <div className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+              <button
+                onClick={() => navigateItem(-1)}
+                aria-label="Previous product"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-[#c1ddcb] shadow-lg flex items-center justify-center text-[#2b4224] hover:bg-[#4ca735] hover:text-white hover:border-[#4ca735] hover:scale-110 active:scale-95 transition-all duration-200"
+              >
+                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 rotate-90" />
+              </button>
+              {/* Dot indicators */}
+              <div className="flex flex-col items-center gap-1.5 py-1">
+                {ELEMENT_NAMES.map((name) => (
+                  <button
+                    key={name}
+                    onClick={() => handleItemClick(name)}
+                    aria-label={name}
+                    className={`rounded-full transition-all duration-300 ${
+                      expandedId === name
+                        ? 'w-2 h-5 bg-[#4ca735]'
+                        : 'w-1.5 h-1.5 bg-[#c1ddcb] hover:bg-[#4ca735]/60'
+                    }`}
+                  />
+                ))}
+              </div>
+              <button
+                onClick={() => navigateItem(1)}
+                aria-label="Next product"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-[#c1ddcb] shadow-lg flex items-center justify-center text-[#2b4224] hover:bg-[#4ca735] hover:text-white hover:border-[#4ca735] hover:scale-110 active:scale-95 transition-all duration-200"
+              >
+                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 rotate-90" />
+              </button>
+            </div>
             <AnimatePresence mode="popLayout">
               {sortedElements.map((item) => {
                 const isExpanded = expandedId === item.name;
