@@ -2,6 +2,8 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ShoppingBag, Plus, Minus, ArrowRight, ShieldCheck, ShoppingCart } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 const UPSELL = {
   id: 'neurofuel-lions-mane',
@@ -14,6 +16,8 @@ const UPSELL = {
 };
 
 export default function SlideOutCart() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const {
     items, removeItem, updateQuantity,
     subtotal, savings, total,
@@ -47,9 +51,9 @@ export default function SlideOutCart() {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-              <h2 className="text-xl font-black italic tracking-tighter text-[#1a2f1c] flex items-center gap-2">
+              <h2 className="text-xl font-black italic tracking-tighter text-[#1a2f1c] flex items-center gap-2 uppercase">
                 <ShoppingBag className="w-5 h-5" />
-                YOUR CART
+                {t.cart.title}
                 {count > 0 && (
                   <span className="text-sm font-bold not-italic bg-[#1a2f1c] text-white rounded-full w-6 h-6 flex items-center justify-center">
                     {count}
@@ -74,9 +78,9 @@ export default function SlideOutCart() {
                     <ShoppingCart className="w-9 h-9 text-[#c1ddcb]" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-[#1a2f1c] mb-2">Your cart is empty</h3>
+                    <h3 className="text-xl font-bold text-[#1a2f1c] mb-2">{t.cart.empty}</h3>
                     <p className="text-sm text-[#59685e] font-medium leading-relaxed">
-                      Add a product to get started on your performance stack.
+                      {t.cart.emptyDesc}
                     </p>
                   </div>
                   <button
@@ -86,7 +90,7 @@ export default function SlideOutCart() {
                     }}
                     className="mt-2 bg-[#1a2f1c] hover:bg-black text-white px-7 py-3 rounded-full font-bold text-sm tracking-wide transition-colors"
                   >
-                    Shop Products
+                    {language === 'en' ? 'Shop Products' : 'Acheter nos Produits'}
                   </button>
                 </div>
               ) : (
@@ -153,7 +157,7 @@ export default function SlideOutCart() {
                                 ${(item.price * item.quantity).toFixed(2)}
                               </span>
                               {item.quantity > 1 && (
-                                <p className="text-[10px] text-[#9faaa2]">${item.price.toFixed(2)} each</p>
+                                <p className="text-[10px] text-[#9faaa2]">${item.price.toFixed(2)} {language === 'en' ? 'each' : 'chacun'}</p>
                               )}
                             </div>
                           </div>
@@ -165,13 +169,13 @@ export default function SlideOutCart() {
                   {/* ── Subscribe & Save ── */}
                   <div className="relative border border-[#4ca735]/30 bg-[#4ca735]/5 rounded-2xl p-4 overflow-hidden">
                     <div className="absolute top-0 right-0 bg-[#4ca735] text-white text-[10px] uppercase font-bold px-2.5 py-1 rounded-bl-xl tracking-wide">
-                      Recommended
+                      {language === 'en' ? 'Recommended' : 'Recommandé'}
                     </div>
                     <h5 className="font-bold text-[#2b4224] flex items-center gap-1.5 text-sm mb-1.5">
-                      <ShieldCheck className="w-4 h-4 text-[#4ca735]" /> Subscribe &amp; Save 15%
+                      <ShieldCheck className="w-4 h-4 text-[#4ca735]" /> {language === 'en' ? 'Subscribe & Save 15%' : 'S\'abonner et Économiser 15%'}
                     </h5>
                     <p className="text-xs text-[#59685e] mb-3 leading-relaxed">
-                      Lock in a permanent 15% discount with free shipping. Cancel anytime.
+                      {language === 'en' ? 'Lock in a permanent 15% discount with free shipping. Cancel anytime.' : 'Bénéficiez d\'une remise permanente de 15% avec livraison gratuite. Annulez à tout moment.'}
                     </p>
                     <label className="flex items-center gap-2 cursor-pointer select-none">
                       <div
@@ -188,8 +192,8 @@ export default function SlideOutCart() {
                       </div>
                       <span className="text-sm font-semibold text-[#1a2f1c]">
                         {isSubscribed
-                          ? `Subscribe Monthly ($${(subtotal * 0.85).toFixed(2)}/mo)`
-                          : 'One-time purchase'}
+                          ? `${language === 'en' ? 'Subscribe Monthly' : 'S\'abonner mensuellement'} ($${(subtotal * 0.85).toFixed(2)}/mo)`
+                          : (language === 'en' ? 'One-time purchase' : 'Achat unique')}
                       </span>
                     </label>
                   </div>
@@ -198,7 +202,7 @@ export default function SlideOutCart() {
                   {hasUpsell && (
                     <div className="border-t border-gray-100 pt-4">
                       <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">
-                        Complete Your Stack
+                        {language === 'en' ? 'Complete Your Stack' : 'Complétez votre protocole'}
                       </h4>
                       <div className="flex items-center justify-between bg-white border border-gray-100 rounded-xl p-3 shadow-sm hover:border-[#eab300]/50 transition-colors cursor-pointer group">
                         <div className="flex items-center gap-3 relative">
@@ -235,7 +239,7 @@ export default function SlideOutCart() {
                           }
                           className="bg-gray-100 group-hover:bg-[#eab300] text-gray-600 group-hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-colors shrink-0"
                         >
-                          Add
+                          {language === 'en' ? 'Add' : 'Ajouter'}
                         </button>
                       </div>
                     </div>
@@ -250,35 +254,34 @@ export default function SlideOutCart() {
                 {/* Order summary */}
                 <div className="space-y-1.5 text-sm">
                   <div className="flex justify-between text-[#59685e]">
-                    <span>Subtotal ({count} {count === 1 ? 'item' : 'items'})</span>
+                    <span>{language === 'en' ? 'Subtotal' : 'Sous-total'} ({count} {count === 1 ? (language === 'en' ? 'item' : 'article') : (language === 'en' ? 'items' : 'articles')})</span>
                     <span className="font-semibold text-[#1a2f1c]">${subtotal.toFixed(2)}</span>
                   </div>
                   {isSubscribed && (
                     <div className="flex justify-between text-[#4ca735] font-semibold">
-                      <span>Subscribe &amp; Save (15%)</span>
+                      <span>{language === 'en' ? 'Subscribe & Save (15%)' : 'S\'abonner et Économiser (15%)'}</span>
                       <span>−${savings.toFixed(2)}</span>
                     </div>
                   )}
                   <div className="flex justify-between font-bold text-base text-[#1a2f1c] pt-1.5 border-t border-gray-100">
-                    <span>Total</span>
+                    <span>{t.cart.total}</span>
                     <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
 
                 {isSubscribed && (
                   <p className="text-xs text-[#4ca735] font-semibold text-center bg-[#4ca735]/8 py-1.5 rounded-full">
-                    You're saving ${savings.toFixed(2)} with Subscribe &amp; Save!
+                    {language === 'en' ? `You're saving $${savings.toFixed(2)} with Subscribe & Save!` : `Vous économisez $${savings.toFixed(2)} avec l'abonnement !`}
                   </p>
                 )}
 
                 <button className="w-full bg-[#1a2f1c] hover:bg-black text-white py-4 rounded-2xl font-bold tracking-wide flex justify-center items-center gap-2 transition-all duration-200 shadow-xl active:scale-[0.98] cursor-pointer">
-                  Checkout Securely <ArrowRight className="w-5 h-5" />
+                  {t.cart.checkout} <ArrowRight className="w-5 h-5" />
                 </button>
 
                 <div className="flex justify-center items-center gap-5 pt-1 text-[10px] font-bold text-gray-300 select-none">
-                  <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> SSL SECURE</span>
-                  <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> 60-DAY GUARANTEE</span>
-                  <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> FREE RETURNS</span>
+                  <span className="flex items-center gap-1 uppercase"><ShieldCheck className="w-3 h-3" /> {language === 'en' ? 'SSL SECURE' : 'SÉCURISÉ SSL'}</span>
+                  <span className="flex items-center gap-1 uppercase"><ShieldCheck className="w-3 h-3" /> {language === 'en' ? '60-DAY GUARANTEE' : 'GARANTIE 60 JOURS'}</span>
                 </div>
               </div>
             )}

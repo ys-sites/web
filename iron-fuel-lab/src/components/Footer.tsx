@@ -1,7 +1,12 @@
 import React from 'react';
 import { Instagram, Mail, Phone, ShieldCheck, Leaf, Zap } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 export default function Footer() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -9,9 +14,9 @@ export default function Footer() {
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   const badges = [
-    { icon: ShieldCheck, label: 'Third-Party Tested' },
-    { icon: Leaf, label: '100% Vegan' },
-    { icon: Zap, label: 'Made in USA' },
+    { icon: ShieldCheck, label: t.footer.tested },
+    { icon: Leaf, label: t.footer.vegan },
+    { icon: Zap, label: t.footer.usa },
   ];
 
   return (
@@ -56,7 +61,7 @@ export default function Footer() {
             </button>
 
             <p className="text-[#6b7d6e] text-sm leading-relaxed mb-8 max-w-[320px]">
-              Advanced, medical-grade formulas engineered for high-performers seeking absolute peak results. Backed by science. Built in the USA.
+              {t.footer.brandDesc}
             </p>
 
             {/* Trust badges */}
@@ -91,14 +96,14 @@ export default function Footer() {
           <div className="md:col-span-3">
             <h4 className="text-white font-bold tracking-[0.2em] uppercase text-[10px] mb-7 flex items-center gap-2">
               <span className="w-4 h-[1px] bg-[#4ca735] inline-block" />
-              Navigate
+              {t.footer.navigate}
             </h4>
             <ul className="space-y-4">
               {[
-                { label: 'Our Products', id: 'products-section' },
-                { label: 'Product Specs', id: 'about-section' },
-                { label: 'Testimonials', id: 'testimonials' },
-                { label: 'FAQ', id: 'faq' },
+                { label: t.nav.products, id: 'products-section' },
+                { label: t.nav.specs, id: 'about-section' },
+                { label: t.nav.testimonials, id: 'testimonials' },
+                { label: t.nav.faq, id: 'faq' },
               ].map(({ label, id }) => (
                 <li key={id}>
                   <button
@@ -117,7 +122,7 @@ export default function Footer() {
           <div className="md:col-span-3">
             <h4 className="text-white font-bold tracking-[0.2em] uppercase text-[10px] mb-7 flex items-center gap-2">
               <span className="w-4 h-[1px] bg-[#dca853] inline-block" />
-              Support
+              {t.footer.support}
             </h4>
             <ul className="space-y-4">
 
@@ -149,12 +154,12 @@ export default function Footer() {
           style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
         >
           <p className="text-white/20 text-xs font-medium">
-            © {new Date().getFullYear()} Iron Fuel Lab. All rights reserved.
+            © {new Date().getFullYear()} Iron Fuel Lab. {t.footer.rights}
           </p>
           <div className="flex gap-6 text-white/20 text-xs font-medium">
-            <a href="#" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors duration-200">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors duration-200">Refund Policy</a>
+            <a href="#" className="hover:text-white transition-colors duration-200">{t.footer.privacy}</a>
+            <a href="#" className="hover:text-white transition-colors duration-200">{t.footer.terms}</a>
+            <a href="#" className="hover:text-white transition-colors duration-200">{t.footer.refund}</a>
           </div>
         </div>
 

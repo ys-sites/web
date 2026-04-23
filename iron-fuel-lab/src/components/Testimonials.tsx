@@ -2,8 +2,10 @@ import React, { useEffect, useCallback } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Star } from 'lucide-react';
 import BlurText from './BlurText';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
-const TESTIMONIALS = [
+const TESTIMONIALS_EN = [
   {
     name: "Alex M.",
     role: "Professional Athlete",
@@ -48,10 +50,59 @@ const TESTIMONIALS = [
   }
 ];
 
+const TESTIMONIALS_FR = [
+  {
+    name: "Alex M.",
+    role: "Athlète Professionnel",
+    quote: "La formule Créatine Hydratation a complètement changé ma fenêtre de récupération. Je récupère plus vite et je m'entraîne plus dur.",
+    rating: 5,
+    avatar: "https://i.pravatar.cc/150?img=11"
+  },
+  {
+    name: "Sarah K.",
+    role: "Ingénieure Logiciel",
+    quote: "NeuroFuel est exactement ce dont j'avais besoin pour mes blocs de concentration profonde. Énergie propre, pas de crash, clarté mentale pure.",
+    rating: 5,
+    avatar: "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    name: "James T.",
+    role: "Marathonien",
+    quote: "J'ai tout essayé pour la santé intestinale, mais Digestive Equilibrium est la première chose qui a vraiment apaisé mon estomac pendant les semaines à gros volume.",
+    rating: 5,
+    avatar: "https://i.pravatar.cc/150?img=13"
+  },
+  {
+    name: "Elena R.",
+    role: "Entrepreneuse",
+    quote: "ZenFuel est mon rituel du soir. Faire baisser le cortisol et obtenir enfin un sommeil paradoxal profond fait toute la différence le lendemain.",
+    rating: 5,
+    avatar: "https://i.pravatar.cc/150?img=14"
+  },
+  {
+    name: "Marcus W.",
+    role: "Coach Sportif",
+    quote: "La protéine Isolate se mélange parfaitement et fournit un carburant pur. Pas de ballonnements, juste des acides aminés de haute qualité pour de vrais résultats.",
+    rating: 5,
+    avatar: "https://i.pravatar.cc/150?img=15"
+  },
+  {
+    name: "David C.",
+    role: "Triathlète",
+    quote: "Gamme de produits absolument phénoménale. Pas de mélanges propriétaires, juste des dosages transparents qui fonctionnent exactement comme annoncé.",
+    rating: 5,
+    avatar: "https://i.pravatar.cc/150?img=16"
+  }
+];
+
 const SCROLL_DURATION = 40;
 
 export default function Testimonials() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const controls = useAnimation();
+  
+  const currentTestimonials = language === 'en' ? TESTIMONIALS_EN : TESTIMONIALS_FR;
 
   const startScroll = useCallback(() => {
     controls.start({
@@ -79,10 +130,10 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-block px-4 py-1.5 rounded-full border border-white/20 text-xs font-semibold mb-6 text-white tracking-wider uppercase backdrop-blur-sm">
-            Community Verified
+            {language === 'en' ? "Community Verified" : "Vérifié par la Communauté"}
           </div>
           <BlurText
-            text="Loved by Our Customers"
+            text={t.nav.testimonials}
             direction="bottom"
             className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tighter text-white mb-6 justify-center text-center"
           />
@@ -102,7 +153,7 @@ export default function Testimonials() {
           animate={controls}
           className="flex gap-6 md:gap-8 px-6 md:px-8 w-max"
         >
-          {[...TESTIMONIALS, ...TESTIMONIALS].map((test, index) => (
+          {[...currentTestimonials, ...currentTestimonials].map((test, index) => (
             <div
               key={index}
               className="w-[300px] md:w-[380px] shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-3xl p-7 md:p-8 flex flex-col justify-between hover:bg-white/8 hover:border-white/20 transition-all duration-300 shadow-2xl"

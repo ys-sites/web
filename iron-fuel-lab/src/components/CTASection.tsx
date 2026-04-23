@@ -2,8 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Mail } from 'lucide-react';
 import BlurText from './BlurText';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 export default function CTASection() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
   return (
     <section className="relative py-32 px-4 md:px-8 overflow-hidden bg-black">
       {/* Full-section background image */}
@@ -40,12 +45,12 @@ export default function CTASection() {
           </div>
 
           <BlurText
-            text="Optimize Your Output."
+            text={t.cta.heading}
             direction="bottom"
             className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 justify-center"
           />
           <BlurText
-            text="Join thousands of high-performers optimizing their health and potential. Get 15% off your first Iron Fuel Lab protocol."
+            text={t.cta.description}
             direction="bottom"
             delay={300}
             className="text-base md:text-xl text-[#9faaa2] mb-10 max-w-2xl mx-auto font-medium justify-center"
@@ -58,7 +63,7 @@ export default function CTASection() {
               </div>
               <input
                 type="email"
-                placeholder="Enter your email address"
+                placeholder={t.cta.placeholder}
                 className="block w-full pl-12 pr-4 py-4 md:py-5 bg-white/5 border border-white/20 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#4ca735] focus:border-transparent transition-all backdrop-blur-sm"
                 required
               />
@@ -67,11 +72,11 @@ export default function CTASection() {
               type="submit"
               className="mt-3 sm:mt-0 px-8 py-4 md:py-5 bg-white hover:bg-gray-100 text-black rounded-2xl font-bold tracking-wide transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2 whitespace-nowrap active:scale-95 shrink-0"
             >
-              Get Access
+              {t.cta.button}
               <ArrowRight className="w-5 h-5" />
             </button>
           </form>
-          <p className="text-xs text-white/30 mt-6 font-medium">Safe, secure, and spam-free. Unsubscribe anytime.</p>
+          <p className="text-xs text-white/30 mt-6 font-medium">{t.cta.spam}</p>
         </motion.div>
       </div>
     </section>

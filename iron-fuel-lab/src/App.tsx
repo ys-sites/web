@@ -15,6 +15,8 @@ import FAQSection from "./components/FAQSection";
 import TrustScienceSection from "./components/TrustScienceSection";
 import CTASection from "./components/CTASection";
 import { CartProvider, useCart } from "./context/CartContext";
+import { LanguageProvider, useLanguage } from "./context/LanguageContext";
+import { translations } from "./translations";
 
 const PRODUCTS = [
   {
@@ -142,6 +144,8 @@ const HeroSection = memo(function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openCart, count } = useCart();
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -239,17 +243,36 @@ const HeroSection = memo(function HeroSection() {
                   onClick={() => scrollToSection(item.id)}
                   className="hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap"
                 >
-                  {item.label}
+                  {t.nav[item.id.replace("-section", "") as keyof typeof t.nav] || item.label}
                 </button>
               ))}
             </nav>
+
+            {/* Brand logo — Only on Mobile for phone ratio as requested */}
+            <div className="flex md:hidden items-center gap-2 absolute left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none select-none">
+              <img 
+                src="/logo.png" 
+                alt="Iron Fuel Lab" 
+                className="w-10 h-10 object-contain" 
+              />
+              <span className="text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
+                IRON FUEL LAB.
+              </span>
+            </div>
 
 
 
             {/* Right actions */}
             <div className="flex gap-2 md:gap-3 items-center ml-auto md:ml-0">
+              {/* Language Switcher */}
+              <button
+                onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+                className="flex px-3 py-1.5 rounded-full border border-white/20 bg-white/5 text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-200 cursor-pointer font-display"
+              >
+                {language === "en" ? "FR" : "EN"}
+              </button>
               <button className="hidden sm:flex px-5 py-1.5 rounded-full border border-white/20 bg-white/5 text-[11px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-200 cursor-pointer font-display">
-                Sign in
+                {t.nav.signin}
               </button>
               <button
                 onClick={openCart}
@@ -308,10 +331,10 @@ const HeroSection = memo(function HeroSection() {
                     <IconComponent className="w-5 h-5" />
                   </div>
                   <h4 className="text-white font-bold text-base sm:text-lg tracking-tight mb-1 font-display">
-                    {slide.badge.title}
+                    {t.hero[slide.badge.title.toLowerCase().replace(" ", "") as keyof typeof t.hero] || slide.badge.title}
                   </h4>
                   <p className="text-gray-300 text-xs sm:text-sm font-medium">
-                    {slide.badge.desc}
+                    {t.hero[slide.badge.desc.toLowerCase().replace(" ", "").replace("100%veganfriendly", "vegan") as keyof typeof t.hero] || slide.badge.desc}
                   </p>
                 </div>
               </div>
@@ -329,11 +352,11 @@ const HeroSection = memo(function HeroSection() {
               }`}
             >
               <BlurText
-                text={slide.titleWords.join(" ")}
+                text={slide.titleWords.map(w => t.hero[w.toLowerCase() as keyof typeof t.hero] || w).join(" ")}
                 direction="bottom"
                 delay={50}
                 animateBy="words"
-                highlightWord={slide.highlightWord}
+                highlightWord={t.hero[slide.highlightWord.toLowerCase() as keyof typeof t.hero] || slide.highlightWord}
                 highlightColor={slide.highlightColor}
                 className="text-[2.2rem] sm:text-[2.8rem] md:text-[4.5rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
               />
@@ -342,43 +365,43 @@ const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* ── Slide Control Tags ─────────────────────────────────── */}
-        <div className="absolute bottom-8 left-4 md:left-8 z-30 flex flex-row flex-wrap gap-2.5 max-w-[calc(100vw-6rem)] md:max-w-3xl">
+        <div className="absolute bottom-6 md:bottom-8 left-4 md:left-8 z-30 flex flex-row flex-nowrap gap-1.5 md:gap-2.5 max-w-[calc(100vw-2rem)] md:max-w-3xl overflow-x-auto no-scrollbar pb-2">
           {HERO_SLIDES.map((slide, index) => (
             <button
               key={slide.id}
               onClick={() => setCurrentSlide(index)}
-              className={`px-5 py-2.5 rounded-full backdrop-blur-md text-sm font-semibold transition-all duration-500 cursor-pointer text-center ${
+              className={`px-3 md:px-5 py-2 md:py-2.5 rounded-full backdrop-blur-md text-[10px] md:text-sm font-semibold transition-all duration-500 cursor-pointer text-center whitespace-nowrap ${
                 currentSlide === index
                   ? "bg-white text-black border border-transparent shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                   : "bg-[#1a1a1a]/70 text-white hover:bg-white/10 border border-white/30"
               }`}
             >
-              {slide.tag}
+              {t.hero[slide.tag.toLowerCase().split(" ")[0] as keyof typeof t.hero] || slide.tag}
             </button>
           ))}
         </div>
 
         {/* ── Review / Brand Card ───────────────────────────────── */}
-        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[240px] sm:max-w-[280px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-4 sm:p-5 md:p-7 rounded-3xl sm:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-4">
-          <div className="flex items-center gap-3 md:gap-5">
-            <div className="flex -space-x-3 md:-space-x-4">
-              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[2px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[2px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[2px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
+        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[180px] sm:max-w-[280px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3 sm:p-5 md:p-7 rounded-2xl sm:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-2 sm:space-y-4">
+          <div className="flex items-center gap-2 sm:gap-5">
+            <div className="flex -space-x-2 sm:-space-x-4">
+              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-7 h-7 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[1.5px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-7 h-7 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[1.5px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-7 h-7 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[1.5px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
             </div>
             <div>
               <div className="flex gap-0.5 sm:gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-3.5 h-3.5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-amber-400 fill-current" />
+                  <Star key={i} className="w-2.5 h-2.5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-amber-400 fill-current" />
                 ))}
               </div>
-              <div className="text-xs sm:text-base md:text-lg text-white mt-0.5 font-bold font-display">
-                18,921 reviews
+              <div className="text-[10px] sm:text-base md:text-lg text-white mt-0.5 font-bold font-display leading-tight">
+                {t.hero.reviews}
               </div>
             </div>
           </div>
-          <p className="text-xs sm:text-sm md:text-base lg:text-[1.1rem] text-white/85 leading-relaxed font-semibold">
-            Iron Fuel Lab Is A US-Made Dietary Supplement Brand Focused On Advanced Formula Vitamins &amp; Minerals
+          <p className="text-[9px] sm:text-sm md:text-base lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
+            {t.hero.description}
           </p>
         </div>
 
@@ -392,7 +415,7 @@ const HeroSection = memo(function HeroSection() {
               HERO_SLIDES[currentSlide].buttonBg
             } ${HERO_SLIDES[currentSlide].buttonHover}`}
           >
-            <span className="font-bold text-xs sm:text-sm tracking-wide">Order Now</span>
+            <span className="font-bold text-xs sm:text-sm tracking-wide">{t.nav.ordernow}</span>
             <div className="bg-black/20 text-current p-2 sm:p-2.5 rounded-full transition-colors">
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
@@ -408,7 +431,7 @@ const HeroSection = memo(function HeroSection() {
                 onClick={openCart}
                 className="flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white rounded-full pl-4 pr-1.5 py-1.5 transition-colors duration-200 cursor-pointer shadow-lg"
               >
-                <span className="font-bold text-xs sm:text-sm tracking-wide">Cart</span>
+                <span className="font-bold text-xs sm:text-sm tracking-wide">{t.nav.cart}</span>
                 <span className="bg-white text-black text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center">
                   {count > 9 ? "9+" : count}
                 </span>
@@ -457,23 +480,23 @@ const HeroSection = memo(function HeroSection() {
               {/* Nav links */}
               <div className="flex flex-col gap-0.5">
                 {NAV_ITEMS.map((item, i) => (
-                  <motion.button
-                    key={item.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.055 + 0.1, duration: 0.35 }}
-                    onClick={() => { scrollToSection(item.id); closeMobileMenu(); }}
-                    className="text-left text-xl font-bold text-white/55 hover:text-white py-4 border-b border-white/8 transition-colors duration-200 font-display"
-                  >
-                    {item.label}
-                  </motion.button>
+                    <motion.button
+                      key={item.label}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.055 + 0.1, duration: 0.35 }}
+                      onClick={() => { scrollToSection(item.id); closeMobileMenu(); }}
+                      className="text-left text-xl font-bold text-white/55 hover:text-white py-4 border-b border-white/8 transition-colors duration-200 font-display"
+                    >
+                      {t.nav[item.id.replace("-section", "") as keyof typeof t.nav] || item.label}
+                    </motion.button>
                 ))}
               </div>
 
               {/* Bottom actions */}
               <div className="mt-auto pt-8 flex flex-col gap-3">
                 <button className="w-full py-3.5 rounded-full bg-white text-black font-bold tracking-wide text-sm hover:bg-white/90 active:scale-[0.98] transition-all font-display">
-                  Sign In
+                  {t.nav.signin}
                 </button>
                 <div className="flex justify-center gap-5 pt-2">
                   <Instagram className="w-5 h-5 text-white/30 hover:text-white transition-colors cursor-pointer" />
@@ -489,6 +512,8 @@ const HeroSection = memo(function HeroSection() {
 
 const ProductsSection = memo(function ProductsSection() {
   const { addItem, openCart } = useCart();
+  const { language } = useLanguage();
+  const t = translations[language];
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 1]);
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < 768 : false
@@ -552,10 +577,10 @@ const ProductsSection = memo(function ProductsSection() {
             className="max-w-2xl"
           >
             <div className="inline-block px-4 py-1.5 rounded-full border border-[#2b4224]/30 text-xs font-semibold mb-6 text-[#2b4224] tracking-wider uppercase">
-              OUR PRODUCTS
+              {t.products.title}
             </div>
             <BlurText
-              text="Explore Our Natural Herbal Extracts"
+              text={t.products.heading}
               delay={50}
               className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-[#1a2318]"
             />
@@ -569,14 +594,13 @@ const ProductsSection = memo(function ProductsSection() {
             className="max-w-md flex flex-col items-start xl:items-end xl:text-right"
           >
             <p className="text-[#3a4d35] mb-6 text-sm lg:text-base leading-relaxed">
-              Every formula is engineered from pure adaptogens using an advanced extraction system,
-              ensuring the natural ingredients maintain complete efficacy and maximum absorption.
+              {t.products.description}
             </p>
             <button
               onClick={() => scrollToSection("about-section")}
               className="flex items-center gap-2 bg-[#1a2318] hover:bg-[#2b4224] text-white px-5 py-2.5 rounded-full font-medium transition-colors duration-200 cursor-pointer group shadow-lg"
             >
-              View More
+              {t.products.viewMore}
               <div className="bg-white text-[#1a2318] rounded-full p-1 group-hover:scale-110 transition-transform duration-200">
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -797,6 +821,8 @@ const PRODUCT_SPECS = [
   ];
 
 const AboutSection = memo(function AboutSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -872,12 +898,12 @@ const AboutSection = memo(function AboutSection() {
       <div className="bg-[#eff3f0] py-24 md:py-32 px-4 md:px-8 relative overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-20 w-full text-center mt-0 md:-mt-8 mb-4">
           <BlurText
-            text="Derived From the Earth."
+            text={t.specs.title}
             direction="bottom"
             className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold mb-2 tracking-tight leading-tight justify-center text-[#1a2f1c]"
           />
           <BlurText
-            text="Discover the natural elements we combine to create our medical-grade cellular recovery formulas."
+            text={t.specs.description}
             direction="bottom"
             delay={300}
             className="text-xl md:text-3xl lg:text-[2.25rem] font-medium text-[#9faaa2] tracking-tight leading-relaxed max-w-4xl mx-auto mt-4 mb-0 relative z-20 justify-center"
@@ -973,24 +999,24 @@ const AboutSection = memo(function AboutSection() {
                         >
                           <div className="bg-white/90 backdrop-blur-md rounded-[1.5rem] p-7 shadow-xl border border-white/60 sticky top-[180px]">
                             <h4 className="text-lg font-bold text-[#1a2f1c] mb-6 uppercase tracking-wider flex items-center gap-2">
-                              <Sparkles className="w-5 h-5" style={{ color: item.color }} /> Specifications
+                              <Sparkles className="w-5 h-5" style={{ color: item.color }} /> {t.specs.specifications}
                             </h4>
                             <div className="space-y-5">
                               <div>
-                                <h6 className="font-bold text-[#2b4224] mb-3 text-sm">Ingredients</h6>
+                                <h6 className="font-bold text-[#2b4224] mb-3 text-sm">{t.specs.ingredients}</h6>
                                 <ul className="list-disc pl-5 space-y-2 text-sm text-[#59685e] font-medium leading-relaxed">
                                   {item.leftInfo.ingredients.map((ing, iidx) => <li key={iidx}>{ing}</li>)}
                                 </ul>
                               </div>
                               <div className="pt-1">
-                                <h6 className="font-bold text-[#2b4224] mb-3 text-sm">Product Details</h6>
+                                <h6 className="font-bold text-[#2b4224] mb-3 text-sm">{t.specs.productDetails}</h6>
                                 <ul className="list-disc pl-5 space-y-2 text-sm text-[#59685e] font-medium leading-relaxed">
                                   {item.leftInfo.details.map((d, didx) => <li key={didx}>{d}</li>)}
                                 </ul>
                               </div>
                               {"flavor" in item.leftInfo && item.leftInfo.flavor && (
                                 <div className="pt-1">
-                                  <h6 className="font-bold text-[#2b4224] mb-2 text-sm">Flavor</h6>
+                                  <h6 className="font-bold text-[#2b4224] mb-2 text-sm">{t.specs.flavor}</h6>
                                   <p className="text-sm text-[#59685e] font-medium">{item.leftInfo.flavor}</p>
                                 </div>
                               )}
@@ -1012,7 +1038,7 @@ const AboutSection = memo(function AboutSection() {
                         >
                           <div className="bg-white/90 backdrop-blur-md rounded-[1.5rem] p-7 shadow-xl border border-white/60 sticky top-[180px]">
                             <h4 className="text-lg font-bold text-[#1a2f1c] mb-6 uppercase tracking-wider flex items-center gap-2">
-                              <ShieldCheck className="w-5 h-5" style={{ color: item.color }} /> Extended Profile
+                              <ShieldCheck className="w-5 h-5" style={{ color: item.color }} /> {t.specs.extendedProfile}
                             </h4>
                             <div className="space-y-5">
                               <ul className="space-y-4">
@@ -1024,11 +1050,11 @@ const AboutSection = memo(function AboutSection() {
                                 ))}
                               </ul>
                               <div className="bg-[#f4f7f4] border border-[#eaf0ec] p-4 rounded-xl">
-                                <h6 className="font-bold text-[#2b4224] mb-2 text-sm">Suggested Use</h6>
+                                <h6 className="font-bold text-[#2b4224] mb-2 text-sm">{t.specs.suggestedUse}</h6>
                                 <p className="text-sm text-[#59685e] font-medium leading-relaxed">{item.rightInfo.use}</p>
                               </div>
                               <p className="text-xs text-[#9faaa2] italic leading-tight pt-4 border-t border-[#eaf0ec]/80">
-                                {item.rightInfo.disclaimer}
+                                {t.specs.disclaimer}
                               </p>
                             </div>
                           </div>
@@ -1097,17 +1123,17 @@ const AboutSection = memo(function AboutSection() {
                               <div className="flex 2xl:hidden flex-col gap-6 mt-10 pt-8 border-t border-[#eaf0ec]">
                                 <div className="bg-[#f4f7f4] rounded-2xl p-6 border border-[#eaf0ec]">
                                   <h4 className="text-sm font-bold text-[#1a2f1c] mb-4 uppercase tracking-wider flex items-center gap-1.5">
-                                    <Sparkles className="w-4 h-4 text-[#4ca735]" /> Specifications
+                                    <Sparkles className="w-4 h-4 text-[#4ca735]" /> {t.specs.specifications}
                                   </h4>
                                   <div className="space-y-5">
                                     <div>
-                                      <h6 className="font-bold text-[#2b4224] mb-2 text-sm">Ingredients</h6>
+                                      <h6 className="font-bold text-[#2b4224] mb-2 text-sm">{t.specs.ingredients}</h6>
                                       <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#59685e] font-medium leading-relaxed">
                                         {item.leftInfo.ingredients.map((ing, iidx) => <li key={iidx}>{ing}</li>)}
                                       </ul>
                                     </div>
                                     <div>
-                                      <h6 className="font-bold text-[#2b4224] mb-2 text-sm">Product Details</h6>
+                                      <h6 className="font-bold text-[#2b4224] mb-2 text-sm">{t.specs.productDetails}</h6>
                                       <ul className="list-disc pl-5 space-y-1.5 text-sm text-[#59685e] font-medium leading-relaxed">
                                         {item.leftInfo.details.map((d, didx) => <li key={didx}>{d}</li>)}
                                       </ul>
@@ -1116,7 +1142,7 @@ const AboutSection = memo(function AboutSection() {
                                 </div>
                                 <div className="bg-[#f4f7f4] rounded-2xl p-6 border border-[#eaf0ec]">
                                   <h4 className="text-sm font-bold text-[#1a2f1c] mb-4 uppercase tracking-wider flex items-center gap-1.5">
-                                    <ShieldCheck className="w-4 h-4 text-[#4ca735]" /> Extended Profile
+                                    <ShieldCheck className="w-4 h-4 text-[#4ca735]" /> {t.specs.extendedProfile}
                                   </h4>
                                   <div className="space-y-4">
                                     <ul className="space-y-3">
@@ -1128,10 +1154,10 @@ const AboutSection = memo(function AboutSection() {
                                       ))}
                                     </ul>
                                     <div className="bg-white border border-[#eaf0ec] p-4 rounded-xl">
-                                      <h6 className="font-bold text-[#2b4224] mb-2 text-xs">Suggested Use</h6>
+                                      <h6 className="font-bold text-[#2b4224] mb-2 text-xs">{t.specs.suggestedUse}</h6>
                                       <p className="text-xs text-[#59685e] font-medium leading-relaxed">{item.rightInfo.use}</p>
                                     </div>
-                                    <p className="text-[10px] text-[#9faaa2] italic leading-tight">{item.rightInfo.disclaimer}</p>
+                                    <p className="text-[10px] text-[#9faaa2] italic leading-tight">{t.specs.disclaimer}</p>
                                   </div>
                                 </div>
                               </div>
@@ -1190,8 +1216,10 @@ function AppInner() {
 
 export default function App() {
   return (
-    <CartProvider>
-      <AppInner />
-    </CartProvider>
+    <LanguageProvider>
+      <CartProvider>
+        <AppInner />
+      </CartProvider>
+    </LanguageProvider>
   );
 }

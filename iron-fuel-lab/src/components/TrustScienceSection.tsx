@@ -2,31 +2,36 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, TestTube, Leaf, Award } from 'lucide-react';
 import BlurText from './BlurText';
-
-const BADGES = [
-  {
-    icon: TestTube,
-    title: "Triple Evaluated",
-    desc: "Rigorous 3rd-party batch tested"
-  },
-  {
-    icon: ShieldCheck,
-    title: "GMP Certified",
-    desc: "Milled in FDA registered facilities"
-  },
-  {
-    icon: Leaf,
-    title: "Bioavailable",
-    desc: "100% Non-GMO & ultra-extracted"
-  },
-  {
-    icon: Award,
-    title: "Clinical Dosage",
-    desc: "Zero prop blends, zero fillers"
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
 export default function TrustScienceSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
+
+  const BADGES = [
+    {
+      icon: TestTube,
+      title: language === 'en' ? "Triple Evaluated" : "Triple Évaluation",
+      desc: language === 'en' ? "Rigorous 3rd-party batch tested" : "Tests rigoureux par des tiers"
+    },
+    {
+      icon: ShieldCheck,
+      title: language === 'en' ? "GMP Certified" : "Certifié BPF",
+      desc: language === 'en' ? "Milled in FDA registered facilities" : "Fabriqué dans des installations FDA"
+    },
+    {
+      icon: Leaf,
+      title: t.hero.bioavailable,
+      desc: language === 'en' ? "100% Non-GMO & ultra-extracted" : "100% sans OGM et ultra-extrait"
+    },
+    {
+      icon: Award,
+      title: language === 'en' ? "Clinical Dosage" : "Dosage Clinique",
+      desc: language === 'en' ? "Zero prop blends, zero fillers" : "Zéro mélange propriétaire, zéro charge"
+    }
+  ];
+
   return (
     <section className="bg-[#f2f6f2] py-24 md:py-32 border-y border-[#4ca735]/10 relative overflow-hidden">
       {/* Subtle organic background mesh */}
@@ -42,12 +47,12 @@ export default function TrustScienceSection() {
         >
           <div className="lg:w-[40%] text-center lg:text-left">
             <BlurText 
-               text="Formulated For Physiology"
+               text={t.trust.heading}
                direction="bottom"
                className="text-[#1a2f1c] text-3xl md:text-4xl lg:text-[2.75rem] font-black uppercase tracking-tighter mb-6 italic leading-[0.95]"
             />
             <BlurText 
-               text="We bridge the gap between high-performance longevity protocols and commercial availability. Pure science, no compromises."
+               text={t.trust.description}
                direction="bottom"
                delay={300}
                className="text-[#59685e] font-medium text-lg lg:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 font-serif italic"

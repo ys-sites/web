@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
 import BlurText from './BlurText';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../translations';
 
-const FAQS = [
+const FAQS_EN = [
   {
     question: "Do you use independent 3rd-party testing?",
     answer: "Yes. Every single batch is independently tested by ISO-certified third-party laboratories for heavy metals, microbial contaminants, and active compound verification. You can scan the QR code on any product to view its specific Certificate of Analysis (CoA)."
@@ -26,8 +28,35 @@ const FAQS = [
   }
 ];
 
+const FAQS_FR = [
+  {
+    question: "Utilisez-vous des tests tiers indépendants ?",
+    answer: "Oui. Chaque lot est testé indépendamment par des laboratoires tiers certifiés ISO pour les métaux lourds, les contaminants microbiens et la vérification des composés actifs. Vous pouvez scanner le code QR sur n'importe quel produit pour consulter son certificat d'analyse (CoA) spécifique."
+  },
+  {
+    question: "Quand commencerai-je à ressentir les effets ?",
+    answer: "Cela dépend du produit. Nos formules NeuroFuel (Lion's Mane) et Créatine présentent souvent des avantages cognitifs et d'endurance physique notables dès les 3-5 premiers jours. Les adaptogènes comme ZenFuel (Ashwagandha) s'accumulent dans votre système ; la régulation du cortisol et les bienfaits du sommeil profond se manifestent généralement vers les jours 14-21 d'utilisation constante."
+  },
+  {
+    question: "Vos formules sont-elles sans mélanges propriétaires ?",
+    answer: "100 %. Nous détestons les mélanges propriétaires. Chaque ingrédient que nous utilisons est explicitement répertorié avec son dosage exact en milligrammes et sa méthode d'extraction. Vous méritez de savoir exactement ce qui alimente votre corps."
+  },
+  {
+    question: "Quelle est votre politique de retour et votre garantie ?",
+    answer: "Nous soutenons nos formules de qualité médicale avec une garantie de performance de 60 jours. Si vous utilisez notre produit de manière constante pendant 30 jours et ne constatez pas d'augmentation mesurable de votre performance ou de votre récupération, nous vous rembourserons 100 % de votre achat. Sans poser de questions."
+  },
+  {
+    question: "Comment fonctionne l'abonnement ?",
+    answer: "L'abonnement verrouille une remise permanente de 15 % et vous offre la livraison express gratuite. Vous contrôlez la fréquence (tous les 30, 45 ou 60 jours) via notre portail client. Vous pouvez mettre en pause, sauter une livraison ou annuler instantanément en deux clics. Zéro frais cachés."
+  }
+];
+
 export default function FAQSection() {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  
+  const currentFaqs = language === 'en' ? FAQS_EN : FAQS_FR;
 
   return (
     <section id="faq" className="bg-white py-24 md:py-40 px-4 md:px-8 border-t border-[#eaf0ec] overflow-hidden">
@@ -71,15 +100,15 @@ export default function FAQSection() {
                 transition={{ duration: 0.6 }}
               >
                 <div className="inline-block px-5 py-2 rounded-full border border-[#4ca735]/20 text-[10px] md:text-xs font-black mb-8 text-[#4ca735] tracking-[0.2em] uppercase bg-[#4ca735]/5">
-                  Performance Knowledge Base
+                  {language === 'en' ? "Performance Knowledge Base" : "Base de Connaissances Performance"}
                 </div>
                 <BlurText 
-                   text="Frequently Asked Questions."
+                   text={t.faq.heading}
                    direction="bottom"
                    className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-[#1a2f1c] mb-6 leading-[0.95]"
                 />
                 <BlurText 
-                   text="Radical transparency for radical performance."
+                   text={t.faq.description}
                    direction="bottom"
                    delay={300}
                    className="text-[#59685e] font-serif italic text-lg lg:text-xl"
@@ -88,7 +117,7 @@ export default function FAQSection() {
             </div>
 
             <div className="space-y-5">
-              {FAQS.map((faq, index) => {
+              {currentFaqs.map((faq, index) => {
                 const isOpen = openIndex === index;
                 return (
                   <motion.div 
