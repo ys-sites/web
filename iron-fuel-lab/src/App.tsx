@@ -14,6 +14,7 @@ import StickyActionBar from "./components/StickyActionBar";
 import FAQSection from "./components/FAQSection";
 import TrustScienceSection from "./components/TrustScienceSection";
 import CTASection from "./components/CTASection";
+import { CartProvider, useCart } from "./context/CartContext";
 
 const PRODUCTS = [
   {
@@ -137,9 +138,10 @@ const scrollToSection = (id: string | null) => {
   }
 };
 
-const HeroSection = memo(function HeroSection({ onCartOpen }: { onCartOpen: () => void }) {
+const HeroSection = memo(function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openCart, count } = useCart();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -253,11 +255,25 @@ const HeroSection = memo(function HeroSection({ onCartOpen }: { onCartOpen: () =
                 Sign in
               </button>
               <button
-                onClick={onCartOpen}
-                className="p-2 hover:bg-white/10 text-white rounded-full transition-colors duration-200 cursor-pointer border border-white/10"
+                onClick={openCart}
+                className="relative p-2 hover:bg-white/10 text-white rounded-full transition-colors duration-200 cursor-pointer border border-white/10"
                 aria-label="Open cart"
               >
                 <ShoppingBag className="w-5 h-5" />
+                <AnimatePresence>
+                  {count > 0 && (
+                    <motion.span
+                      key="badge"
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                      className="absolute -top-1 -right-1 min-w-[17px] h-[17px] bg-[#4ca735] rounded-full text-[9px] font-black flex items-center justify-center text-white px-1 pointer-events-none"
+                    >
+                      {count > 9 ? "9+" : count}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
               {/* Hamburger — mobile only */}
               <button
@@ -370,7 +386,7 @@ const HeroSection = memo(function HeroSection({ onCartOpen }: { onCartOpen: () =
         </div>
 
         {/* ── Order Now Button ──────────────────────────────────── */}
-        <div className="absolute bottom-[13%] sm:bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-30">
+        <div className="absolute bottom-[13%] sm:bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-30 flex gap-3 items-center">
           <button
             onClick={() => scrollToSection("products-section")}
             className={`flex items-center justify-between ${
@@ -384,6 +400,20 @@ const HeroSection = memo(function HeroSection({ onCartOpen }: { onCartOpen: () =
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </button>
+          {count > 0 && (
+            <motion.button
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0, opacity: 0 }}
+              onClick={openCart}
+              className="flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white rounded-full pl-4 pr-1.5 py-1.5 transition-all duration-200 cursor-pointer shadow-lg"
+            >
+              <span className="font-bold text-xs sm:text-sm tracking-wide">Cart</span>
+              <span className="bg-white text-black text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center">
+                {count > 9 ? "9+" : count}
+              </span>
+            </motion.button>
+          )}
         </div>
       </div>
 
@@ -454,7 +484,8 @@ const HeroSection = memo(function HeroSection({ onCartOpen }: { onCartOpen: () =
   );
 });
 
-const ProductsSection = memo(function ProductsSection({ openCart }: { openCart: () => void }) {
+const ProductsSection = memo(function ProductsSection() {
+  const { addItem, openCart } = useCart();
   const [[currentIndex, direction], setCurrentIndex] = useState([0, 1]);
   const [isMobile, setIsMobile] = useState(
     typeof window !== "undefined" ? window.innerWidth < 768 : false
@@ -595,10 +626,21 @@ const ProductsSection = memo(function ProductsSection({ openCart }: { openCart: 
                           </div>
                         </div>
                         <button
-                          onClick={openCart}
-                          className={`${product.buttonBg} ${product.buttonHover} ${product.buttonText} px-4 md:px-5 py-2.5 rounded-[1.25rem] text-xs md:text-sm font-semibold transition-colors duration-200 shadow-sm whitespace-nowrap mb-1 cursor-pointer`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addItem({
+                              id: product.id,
+                              name: product.name,
+                              description: product.description,
+                              price: parseFloat(product.price),
+                              image: product.image,
+                              colorBg: product.colorBg,
+                            });
+                            openCart();
+                          }}
+                          className={`${product.buttonBg} ${product.buttonHover} ${product.buttonText} px-4 md:px-5 py-2.5 rounded-[1.25rem] text-xs md:text-sm font-semibold transition-colors duration-200 shadow-sm whitespace-nowrap mb-1 cursor-pointer active:scale-95`}
                         >
-                          Buy Now
+                          Add to Cart
                         </button>
                       </div>
                     </div>
@@ -1044,9 +1086,9 @@ const AboutSection = memo(function AboutSection() {
   );
 });
 
-export default function App() {
-  const [isCartOpen, setIsCartOpen] = useState(false);
+function AppInner() {
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const { isOpen: isCartOpen } = useCart();
 
   useEffect(() => {
     let ticking = false;
@@ -1064,13 +1106,10 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const openCart = useCallback(() => setIsCartOpen(true), []);
-  const closeCart = useCallback(() => setIsCartOpen(false), []);
-
   return (
     <main className="bg-black min-h-screen relative">
-      <HeroSection onCartOpen={openCart} />
-      <ProductsSection openCart={openCart} />
+      <HeroSection />
+      <ProductsSection />
       <AboutSection />
       <TrustScienceSection />
       <Testimonials />
@@ -1078,8 +1117,16 @@ export default function App() {
       <FAQSection />
       <Footer />
 
-      <SlideOutCart isOpen={isCartOpen} onClose={closeCart} />
-      <StickyActionBar isVisible={showStickyBar && !isCartOpen} onAddToCart={openCart} />
+      <SlideOutCart />
+      <StickyActionBar isVisible={showStickyBar && !isCartOpen} />
     </main>
+  );
+}
+
+export default function App() {
+  return (
+    <CartProvider>
+      <AppInner />
+    </CartProvider>
   );
 }
