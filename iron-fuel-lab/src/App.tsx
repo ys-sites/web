@@ -243,7 +243,7 @@ const HeroSection = memo(function HeroSection() {
                   onClick={() => scrollToSection(item.id)}
                   className="hover:text-white transition-colors duration-200 cursor-pointer whitespace-nowrap"
                 >
-                  {t.nav[item.id.replace("-section", "") as keyof typeof t.nav] || item.label}
+                  {item.id ? (t.nav[item.id.replace("-section", "") as keyof typeof t.nav] || item.label) : item.label}
                 </button>
               ))}
             </nav>
@@ -488,7 +488,7 @@ const HeroSection = memo(function HeroSection() {
                       onClick={() => { scrollToSection(item.id); closeMobileMenu(); }}
                       className="text-left text-xl font-bold text-white/55 hover:text-white py-4 border-b border-white/8 transition-colors duration-200 font-display"
                     >
-                      {t.nav[item.id.replace("-section", "") as keyof typeof t.nav] || item.label}
+                      {item.id ? (t.nav[item.id.replace("-section", "") as keyof typeof t.nav] || item.label) : item.label}
                     </motion.button>
                 ))}
               </div>
@@ -667,7 +667,7 @@ const ProductsSection = memo(function ProductsSection() {
                           }}
                           className={`${product.buttonBg} ${product.buttonHover} ${product.buttonText} px-4 md:px-5 py-2.5 rounded-[1.25rem] text-xs md:text-sm font-semibold transition-colors duration-200 shadow-sm whitespace-nowrap mb-1 cursor-pointer active:scale-95`}
                         >
-                          Add to Cart
+                          {t.products.addtoCart}
                         </button>
                       </div>
                     </div>
