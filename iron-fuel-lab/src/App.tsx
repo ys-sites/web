@@ -400,20 +400,24 @@ const HeroSection = memo(function HeroSection() {
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </button>
-          {count > 0 && (
-            <motion.button
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0, opacity: 0 }}
-              onClick={openCart}
-              className="flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white rounded-full pl-4 pr-1.5 py-1.5 transition-all duration-200 cursor-pointer shadow-lg"
-            >
-              <span className="font-bold text-xs sm:text-sm tracking-wide">Cart</span>
-              <span className="bg-white text-black text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center">
-                {count > 9 ? "9+" : count}
-              </span>
-            </motion.button>
-          )}
+          <AnimatePresence>
+            {count > 0 && (
+              <motion.button
+                key="cart-pill"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 22 }}
+                onClick={openCart}
+                className="flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white rounded-full pl-4 pr-1.5 py-1.5 transition-colors duration-200 cursor-pointer shadow-lg"
+              >
+                <span className="font-bold text-xs sm:text-sm tracking-wide">Cart</span>
+                <span className="bg-white text-black text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center">
+                  {count > 9 ? "9+" : count}
+                </span>
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </div>
 

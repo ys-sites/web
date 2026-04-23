@@ -1,0 +1,19 @@
+# Claude Code internal folder
+.claude/
+
+# Project build artifacts and deps (managed per-project)
+iron-fuel-lab/node_modules/
+iron-fuel-lab/dist/
+iron-fuel-lab/build/
+
+# Environment files
+iron-fuel-lab/.env
+iron-fuel-lab/.env.local
+
+# Vercel cache
+.vercel/
+
+# System
+.DS_Store
+Thumbs.db
+*.log
