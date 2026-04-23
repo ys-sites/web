@@ -89,7 +89,10 @@ const HERO_SLIDES = [
     badge: { title: "Stress Support", icon: "Leaf", desc: "100% Vegan Friendly" },
     bg: "/Ashwagandha.jpeg?v=2",
     productImg: null,
-    review: "My sleep quality has skyrocketed. I wake up feeling deeply recovered and ready to tackle whatever comes.",
+    review: {
+      en: "My sleep quality has skyrocketed. I wake up feeling deeply recovered and ready to tackle whatever comes.",
+      fr: "La qualité de mon sommeil a explosé. Je me réveille avec une sensation de récupération profonde et prête à tout affronter."
+    },
     reviewer: "Sarah K."
   },
   {
@@ -104,7 +107,10 @@ const HERO_SLIDES = [
     badge: { title: "Cognitive Focus", icon: "Brain", desc: "Clinically Researched" },
     bg: "/Lion.jpeg?v=2",
     productImg: null,
-    review: "The mental clarity is unmatched. No jitters, just clean, sharp focus that lasts throughout the entire day.",
+    review: {
+      en: "The mental clarity is unmatched. No jitters, just clean, sharp focus that lasts throughout the entire day.",
+      fr: "La clarté mentale est inégalée. Pas de nervosité, juste une concentration nette et précise qui dure toute la journée."
+    },
     reviewer: "Marcus T."
   },
   {
@@ -119,7 +125,10 @@ const HERO_SLIDES = [
     badge: { title: "Digestive Balance", icon: "ShieldCheck", desc: "Potent Prebiotics" },
     bg: "/Gut Health.jpeg?v=2",
     productImg: null,
-    review: "I noticed a visible difference in my digestion within just a week. I feel lighter, energized, and balanced.",
+    review: {
+      en: "I noticed a visible difference in my digestion within just a week. I feel lighter, energized, and balanced.",
+      fr: "J'ai remarqué une différence visible dans ma digestion en seulement une semaine. Je me sens plus léger, énergisé et équilibré."
+    },
     reviewer: "Amanda R."
   }
 ];
@@ -235,8 +244,20 @@ const HeroSection = memo(function HeroSection() {
         {/* ── Top Nav ────────────────────────────────────────── */}
         <header className="absolute top-0 w-full px-4 md:px-8 pt-4 md:pt-6 z-20">
           <div className="bg-white/5 backdrop-blur-xl border-b border-white/10 px-5 md:px-6 py-4 rounded-b-[2rem] flex items-center justify-between shadow-2xl">
+            {/* Brand - Desktop: Logo + Text, Mobile: Text only on Left */}
+            <div className="flex items-center gap-2 md:gap-3 shrink-0">
+              <img 
+                src="/logo.png" 
+                alt="Iron Fuel Lab" 
+                className="hidden md:block w-8 h-8 object-contain" 
+              />
+              <span className="text-sm md:text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
+                IRON FUEL LAB
+              </span>
+            </div>
+
             {/* Desktop nav links */}
-            <nav className="hidden md:flex gap-8 text-[11px] text-white/70 font-bold uppercase tracking-[0.2em]">
+            <nav className="hidden lg:flex gap-8 text-[11px] text-white/70 font-bold uppercase tracking-[0.2em] ml-10">
               {NAV_ITEMS.map((item) => (
                 <button
                   key={item.label}
@@ -247,18 +268,6 @@ const HeroSection = memo(function HeroSection() {
                 </button>
               ))}
             </nav>
-
-            {/* Brand logo — Only on Mobile for phone ratio as requested */}
-            <div className="flex md:hidden items-center gap-2 absolute left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none select-none">
-              <img 
-                src="/logo.png" 
-                alt="Iron Fuel Lab" 
-                className="w-10 h-10 object-contain" 
-              />
-              <span className="text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
-                IRON FUEL LAB.
-              </span>
-            </div>
 
 
 
@@ -358,7 +367,7 @@ const HeroSection = memo(function HeroSection() {
                 animateBy="words"
                 highlightWord={t.hero[slide.highlightWord.toLowerCase() as keyof typeof t.hero] || slide.highlightWord}
                 highlightColor={slide.highlightColor}
-                className="text-[2.2rem] sm:text-[2.8rem] md:text-[4.5rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
+                className="text-[2.1rem] sm:text-[2.5rem] md:text-[3.8rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
               />
             </div>
           ))}
@@ -382,28 +391,29 @@ const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* ── Review / Brand Card ───────────────────────────────── */}
-        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[180px] sm:max-w-[280px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3 sm:p-5 md:p-7 rounded-2xl sm:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-2 sm:space-y-4">
-          <div className="flex items-center gap-2 sm:gap-5">
-            <div className="flex -space-x-2 sm:-space-x-4">
-              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-7 h-7 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[1.5px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-7 h-7 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[1.5px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-7 h-7 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[1.5px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
+        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[170px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3 sm:p-4 md:p-5 lg:p-7 rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1.5 sm:space-y-3 lg:space-y-4">
+          <div className="flex items-center gap-2 sm:gap-4 lg:gap-5">
+            <div className="flex -space-x-2 sm:-space-x-3 lg:-space-x-4">
+              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-full border-[1px] sm:border-[2px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-full border-[1px] sm:border-[2px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-full border-[1px] sm:border-[2px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
             </div>
             <div>
               <div className="flex gap-0.5 sm:gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-2.5 h-2.5 sm:w-5 sm:h-5 md:w-6 md:h-6 text-amber-400 fill-current" />
+                  <Star key={i} className="w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-amber-400 fill-current" />
                 ))}
               </div>
-              <div className="text-[10px] sm:text-base md:text-lg text-white mt-0.5 font-bold font-display leading-tight">
+              <div className="text-[9px] sm:text-sm md:text-base lg:text-lg text-white mt-0.5 font-bold font-display leading-tight">
                 {t.hero.reviews}
               </div>
             </div>
           </div>
-          <p className="text-[9px] sm:text-sm md:text-base lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
-            {t.hero.description}
+          <p className="text-[8px] sm:text-[13px] md:text-sm lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
+            {HERO_SLIDES[currentSlide].review[language as keyof typeof HERO_SLIDES[0]["review"]]}
           </p>
         </div>
+
 
         {/* ── Order Now Button ──────────────────────────────────── */}
         <div className="absolute bottom-[13%] sm:bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 z-30 flex gap-3 items-center">
@@ -465,7 +475,7 @@ const HeroSection = memo(function HeroSection() {
                 <div className="flex flex-col items-center gap-4 w-full">
                   <img src="/logo.png" alt="Iron Fuel Lab" className="w-24 h-24 object-contain rounded-full shadow-2xl" />
                   <span className="text-white text-2xl font-black tracking-tighter font-display">
-                    IRON FUEL LAB.
+                    IRON FUEL LAB
                   </span>
                 </div>
                 <button
@@ -538,7 +548,7 @@ const ProductsSection = memo(function ProductsSection() {
   const prevSlide = useCallback(() => setCurrentIndex(([idx]) => [idx - 1, -1]), []);
 
   const visibleProducts = useMemo(() => {
-    const count = isMobile ? 1 : (window.innerWidth < 1024 ? 2 : 3);
+    const count = isMobile ? 1 : (typeof window !== "undefined" && window.innerWidth < 1024 ? 2 : 3);
     return Array.from({ length: count }, (_, i) => {
       const index = ((currentIndex + i) % PRODUCTS.length + PRODUCTS.length) % PRODUCTS.length;
       return PRODUCTS[index];
@@ -582,7 +592,7 @@ const ProductsSection = memo(function ProductsSection() {
             <BlurText
               text={t.products.heading}
               delay={50}
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-[#1a2318]"
+              className="text-xl sm:text-3xl md:text-4xl lg:text-6xl font-bold tracking-tight leading-[1.1] text-[#1a2318]"
             />
           </motion.div>
 
@@ -690,7 +700,7 @@ const ProductsSection = memo(function ProductsSection() {
   );
 });
 
-const PRODUCT_SPECS = [
+const PRODUCT_SPECS_EN = [
     {
       name: "Organic Ashwagandha",
       icon: Leaf,
@@ -820,6 +830,136 @@ const PRODUCT_SPECS = [
     },
   ];
 
+const PRODUCT_SPECS_FR = [
+    {
+      name: "Ashwagandha Bio",
+      icon: Leaf,
+      color: "#4ca735",
+      middle: {
+        tagline: "😌 Relaxer. Récupérer. Rester Équilibré.",
+        intro: "ZenFuel est une formule adaptogène puissante conçue pour aider à réduire le stress, soutenir la récupération et favoriser un équilibre mental global.\n\nFormulé avec de l'ashwagandha de qualité supérieure et de l'extrait de poivre noir, il aide votre corps à mieux gérer le stress tout en soutenant la concentration, l'humeur et la performance quotidienne.",
+        bullets: ["Aide à Réduire le Stress et le Cortisol", "Soutient la Relaxation et la Récupération", "Améliore l'Humeur et la Concentration", "Équilibre et Bien-être Quotidiens"],
+        closing: "Restez calme. Restez concentré. Restez en contrôle.",
+      },
+      leftInfo: {
+        ingredients: ["Ashwagandha Bio (Withania somnifera) (Racine)", "Poivre Noir Bio (Piper nigrum) (Fruit)", "Capsules de Pullulane"],
+        details: ["Capsules : 60", "Poids Brut : 113 g (0,25 lb)", "Fabriqué aux : USA"],
+      },
+      rightInfo: {
+        specs: [
+          { label: "Extraction", value: "Aqueuse / Spectre Complet" },
+          { label: "Composés Actifs", value: "≥ 5% Withanolides" },
+          { label: "Testé par des Tiers", value: "Oui (Métaux Lourds, Microbes)" },
+          { label: "Biodisponibilité", value: "+2000% via la Pipérine" },
+        ],
+        use: "Prendre 1 capsule deux fois par jour, de préférence 20 à 30 minutes avant un repas, avec un verre d'eau.",
+        disclaimer: "*Ces déclarations n'ont pas été évaluées par la FDA.",
+      },
+    },
+    {
+      name: "Mushroom Lion's Mane",
+      icon: Brain,
+      color: "#eab300",
+      middle: {
+        tagline: "🧠 Concentration. Clarté. Performance Mentale.",
+        intro: "NeuroFuel est une formule nootropique de qualité supérieure conçue pour soutenir la concentration, la mémoire et la performance cérébrale globale.\n\nPropulsé par le champignon Lion's Mane, il aide à soutenir la fonction cognitive, la clarté mentale et la productivité quotidienne — pour que vous puissiez rester affûté et performer au mieux.",
+        bullets: ["Soutient la Concentration et l'Attention", "Améliore la Clarté Mentale", "Favorise la Fonction Cognitive", "Soutien Cérébral Quotidien"],
+        closing: "Restez affûté. Restez concentré. Performez mieux.",
+      },
+      leftInfo: {
+        ingredients: ["Lion's Mane Bio (Hericium erinaceus)", "Poudre de Corps Fructifère et de Mycélium (400 mg)", "Pullulane (Capsule)", "Amidon de Pois Bio"],
+        details: ["Capsules : 60 (Végane)", "Poids Brut : 90 g (0,2 lb)", "Fabriqué aux : USA"],
+      },
+      rightInfo: {
+        specs: [
+          { label: "Extraction", value: "Double Extrait Eau Chaude et Alcool" },
+          { label: "Composés Actifs", value: "≥ 40% Polysaccharides" },
+          { label: "Source", value: "Corps Fructifère + Mycélium" },
+          { label: "Action Primaire", value: "Synthèse du NGF (Nerve Growth Factor)" },
+        ],
+        use: "Prendre 2 capsules par jour, avec ou sans nourriture, ou selon les directives.",
+        disclaimer: "*Ces déclarations n'ont pas été évaluées par la FDA.",
+      },
+    },
+    {
+      name: "Hydratation Créatine",
+      icon: Zap,
+      color: "#06b6d4",
+      middle: {
+        tagline: "⚡ Puissance. Hydratation. Performance.",
+        intro: "FURY Hydrate est une formule de créatine avancée conçue pour augmenter la force, l'endurance et l'hydratation en même temps.\n\nCombinant 5g de monohydrate de créatine avec un mélange d'électrolytes puissant, il aide à alimenter vos muscles, améliorer la performance et maintenir une hydratation optimale pendant l'entraînement intense.",
+        bullets: ["Augmente la Force et la Puissance", "Soutient l'Hydratation et l'Endurance", "Améliore la Performance Musculaire", "Absorption Rapide et Mélange Facile"],
+        closing: "Entraînez-vous plus dur. Restez hydraté. Performez à votre apogée.",
+      },
+      leftInfo: {
+        ingredients: ["Monohydrate de Créatine – 5 000 mg", "Magnésium (sous forme de Malate de Magnésium) – 60 mg", "Sodium (sous forme de Sel de Mer) – 1 000 mg", "Potassium (sous forme de Chlorure de Potassium) – 200 mg"],
+        flavor: "Citron",
+        details: ["Poids Net : 300 g (10,6 oz)", "Poids Brut : 350 g (12,4 oz)", "Fabriqué aux : USA"],
+      },
+      rightInfo: {
+        specs: [
+          { label: "Pureté", value: "99,9% Créatine Micronisée Pure" },
+          { label: "Équilibre Électrolytique", value: "Ratio Na/K optimisé de 5:1" },
+          { label: "Taille de Maille", value: "Ultra-fine (200 mesh) pour le mélange" },
+          { label: "Édulcorant", value: "Extrait Naturel de Feuille de Stévia" },
+        ],
+        use: "Mélanger 1 cuillère (10g) avec 180 à 240 ml d'eau ou votre boisson préférée quotidiennement.",
+        disclaimer: "*Ces déclarations n'ont pas été évaluées par la FDA.",
+      },
+    },
+    {
+      name: "Équilibre Digestif",
+      icon: Droplet,
+      color: "#eab300",
+      middle: {
+        tagline: "🧬 Soutenez votre intestin. Sentez-vous mieux chaque jour.",
+        intro: "GutFuel est une formule complète de soutien digestif conçue pour améliorer la santé intestinale, la digestion et le bien-être général.\n\nPropulsé par un mélange de probiotiques, de prébiotiques et d'enzymes, il aide à équilibrer votre intestin, à soutenir l'absorption des nutriments et à maintenir le bon fonctionnement de votre système.",
+        bullets: ["Soutient une Digestion Saine", "Favorise l'Équilibre Intestinal", "Aide à l'Absorption des Nutriments", "Soutien au Bien-être Quotidien"],
+        closing: "",
+      },
+      leftInfo: {
+        ingredients: ["Poudre de Vinaigre de Cidre de Pomme Bio", "Inuline (Racine de Topinambour)", "Lactobacillus Acidophilus (Probiotique)", "DigeZyme® (Complexe Multi-Enzymatique)"],
+        details: ["Capsules : 60", "Poids Net : 76 g (2,7 oz)", "Fabriqué aux : USA"],
+      },
+      rightInfo: {
+        specs: [
+          { label: "UFC Probiotiques", value: "10 Milliards d'UFC à la fabrication" },
+          { label: "Enzymes", value: "Amylase, Protéase, Lipase, Cellulase" },
+          { label: "Type de Prébiotique", value: "Fructo-oligosaccharides (FOS)" },
+          { label: "Co-facteurs", value: "Acide Acétique (provenant du VCP)" },
+        ],
+        use: "Prendre 2 capsules par jour avec 180 à 240 ml d'eau.",
+        disclaimer: "*Ces déclarations n'ont pas été évaluées par la FDA.",
+      },
+    },
+    {
+      name: "Protéine Isolate Pure",
+      icon: Sparkles,
+      color: "#ef4444",
+      middle: {
+        tagline: "💪 Construire. Réparer. Récupérer Plus Vite.",
+        intro: "Isolat de lactosérum pur nourri à l'herbe conçu pour maximiser la synthèse des protéines musculaires et accélérer la récupération.\n\nTraité à froid pour une biodisponibilité maximale, il fournit les acides aminés essentiels exactement quand votre corps en a besoin, sans ballonnements ni stress digestif.",
+        bullets: ["25g de Protéine Isolat Pure", "Absorption et Digestion Rapides", "Soutient la Croissance Musculaire Maigre", "Zéro Sucre ou Charges Artificielles"],
+        closing: "Alimentez votre récupération. Construisez une force durable.",
+      },
+      leftInfo: {
+        ingredients: ["Isolat de Protéine de Lactosérum Nourri à l'Herbe", "Mélange d'Enzymes Digestives (Protéase)", "Poudre de Cacao Bio", "Lécithine de Tournesol (<1%)"],
+        flavor: "Chocolat Riche",
+        details: ["Portions : 30 par contenant", "Poids Net : 900 g (2 lbs)", "Fabriqué aux : USA"],
+      },
+      rightInfo: {
+        specs: [
+          { label: "Rendement en Protéines", value: "90% en poids" },
+          { label: "Teneur en BCAA", value: "5,5g par portion" },
+          { label: "Teneur en Lactose", value: "< 1% (Ultra-filtré)" },
+          { label: "Sourcing", value: "Élevé au pâturage en Nouvelle-Zélande" },
+        ],
+        use: "Mélanger 1 cuillère avec 240 à 300 ml d'eau ou de lait d'amande après l'entraînement.",
+        disclaimer: "*Ces déclarations n'ont pas été évaluées par la FDA.",
+      },
+    },
+  ];
+
 const AboutSection = memo(function AboutSection() {
   const { language } = useLanguage();
   const t = translations[language];
@@ -835,30 +975,24 @@ const AboutSection = memo(function AboutSection() {
     return () => observer.disconnect();
   }, []);
 
-  const [expandedId, setExpandedId] = useState<string | null>("Organic Ashwagandha");
-  const [itemOrder, setItemOrder] = useState<string[]>([
-    "Organic Ashwagandha",
-    "Lion's Mane Mushroom",
-    "Creatine Hydration",
-    "Digestive Equilibrium",
-    "Pure Isolate Protein",
-  ]);
+  const elements = language === 'en' ? PRODUCT_SPECS_EN : PRODUCT_SPECS_FR;
+  const [expandedId, setExpandedId] = useState<string | null>(elements[0].name);
+  const [itemOrder, setItemOrder] = useState<string[]>(elements.map(e => e.name));
 
   const IMAGE_MAP: Record<string, string> = {
     "Organic Ashwagandha": "/ashwagandha.png",
+    "Ashwagandha Bio": "/ashwagandha.png",
     "Lion's Mane Mushroom": "/NeuroFuel.png",
+    "Mushroom Lion's Mane": "/NeuroFuel.png",
     "Creatine Hydration": "/FURY Hydrate.png",
+    "Hydratation Créatine": "/FURY Hydrate.png",
     "Digestive Equilibrium": "/GutFuel.png",
+    "Équilibre Digestif": "/GutFuel.png",
     "Pure Isolate Protein": "/FURY Isolate.png",
+    "Protéine Isolate Pure": "/FURY Isolate.png",
   };
 
-  const ELEMENT_NAMES = [
-    "Organic Ashwagandha",
-    "Lion's Mane Mushroom",
-    "Creatine Hydration",
-    "Digestive Equilibrium",
-    "Pure Isolate Protein",
-  ];
+  const ELEMENT_NAMES = elements.map(e => e.name);
 
   const handleItemClick = useCallback((name: string) => {
     if (expandedId === name) {
@@ -886,7 +1020,7 @@ const AboutSection = memo(function AboutSection() {
     handleItemClick(next);
   }, [expandedId, handleItemClick]);
 
-  const elements = PRODUCT_SPECS;
+  const elementsData = elements;
 
   const sortedElements = useMemo(
     () => [...elements].sort((a, b) => itemOrder.indexOf(a.name) - itemOrder.indexOf(b.name)),
@@ -900,13 +1034,13 @@ const AboutSection = memo(function AboutSection() {
           <BlurText
             text={t.specs.title}
             direction="bottom"
-            className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold mb-2 tracking-tight leading-tight justify-center text-[#1a2f1c]"
+            className="text-2xl md:text-3xl lg:text-[2.75rem] font-bold mb-2 tracking-tight leading-tight justify-center text-[#1a2f1c]"
           />
           <BlurText
             text={t.specs.description}
             direction="bottom"
             delay={300}
-            className="text-xl md:text-3xl lg:text-[2.25rem] font-medium text-[#9faaa2] tracking-tight leading-relaxed max-w-4xl mx-auto mt-4 mb-0 relative z-20 justify-center"
+            className="text-lg md:text-2xl lg:text-[2.25rem] font-medium text-[#9faaa2] tracking-tight leading-relaxed max-w-4xl mx-auto mt-4 mb-0 relative z-20 justify-center"
           />
         </div>
 

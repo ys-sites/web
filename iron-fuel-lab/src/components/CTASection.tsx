@@ -17,7 +17,7 @@ export default function CTASection() {
           src="/Ashwagandha.jpeg"
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-center opacity-60"
+          className="w-full h-full object-cover object-center opacity-80"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
       </div>
@@ -47,7 +47,7 @@ export default function CTASection() {
           <BlurText
             text={t.cta.heading}
             direction="bottom"
-            className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 justify-center"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tighter text-white mb-4 justify-center"
           />
           <BlurText
             text={t.cta.description}

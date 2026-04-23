@@ -135,7 +135,7 @@ export default function Testimonials() {
           <BlurText
             text={t.nav.testimonials}
             direction="bottom"
-            className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tighter text-white mb-6 justify-center text-center"
+            className="text-2xl sm:text-4xl md:text-4xl lg:text-7xl font-extrabold tracking-tighter text-white mb-6 justify-center text-center"
           />
         </motion.div>
       </div>
