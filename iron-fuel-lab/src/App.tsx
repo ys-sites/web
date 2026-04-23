@@ -246,7 +246,11 @@ const HeroSection = memo(function HeroSection() {
 
             {/* Brand logo */}
             <div className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none select-none">
-              <img src="/iron.png" alt="Iron Fuel Lab" className="w-10 h-10 md:w-14 md:h-14 object-contain rounded-full shadow-lg" />
+              <img 
+                src="/logo.png" 
+                alt="Iron Fuel Lab" 
+                className="w-12 h-12 md:w-16 md:h-16 object-contain rounded-full shadow-2xl p-1.5 bg-white/10 backdrop-blur-md ring-1 ring-white/20" 
+              />
               <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter font-display text-white whitespace-nowrap">
                 IRON FUEL LAB.
               </span>
@@ -341,7 +345,7 @@ const HeroSection = memo(function HeroSection() {
                 animateBy="words"
                 highlightWord={slide.highlightWord}
                 highlightColor={slide.highlightColor}
-                className="text-[2.6rem] sm:text-[3.2rem] md:text-[5rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
+                className="text-[2.2rem] sm:text-[2.8rem] md:text-[4.5rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
               />
             </div>
           ))}
@@ -446,7 +450,7 @@ const HeroSection = memo(function HeroSection() {
               {/* Menu header */}
               <div className="flex items-center justify-between mb-10">
                 <div className="flex items-center gap-2">
-                  <img src="/iron.png" alt="Iron Fuel Lab" className="w-9 h-9 object-contain rounded-full" />
+                  <img src="/logo.png" alt="Iron Fuel Lab" className="w-9 h-9 object-contain rounded-full" />
                   <span className="text-white text-xl font-black tracking-tighter font-display">
                     IRON FUEL LAB.
                   </span>
@@ -519,7 +523,7 @@ const ProductsSection = memo(function ProductsSection() {
   const prevSlide = useCallback(() => setCurrentIndex(([idx]) => [idx - 1, -1]), []);
 
   const visibleProducts = useMemo(() => {
-    const count = isMobile ? 1 : 3;
+    const count = isMobile ? 1 : (window.innerWidth < 1024 ? 2 : 3);
     return Array.from({ length: count }, (_, i) => {
       const index = ((currentIndex + i) % PRODUCTS.length + PRODUCTS.length) % PRODUCTS.length;
       return PRODUCTS[index];
@@ -612,7 +616,7 @@ const ProductsSection = memo(function ProductsSection() {
                     animate="center"
                     exit="exit"
                     key={product.id}
-                    className="relative z-10 group h-[440px] sm:h-[480px] w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] shrink-0"
+                    className="relative z-10 group h-[400px] sm:h-[440px] md:h-[480px] w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] shrink-0"
                   >
                     <div className="absolute inset-0 md:group-hover:-inset-5 transition-all duration-500 rounded-[2.5rem] p-0 md:group-hover:bg-white md:group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15)] flex flex-col md:group-hover:p-5 z-10 md:group-hover:z-50 cursor-pointer">
                       <div className={`relative ${product.colorBg} rounded-[2rem] overflow-hidden flex-1 mb-5`}>
@@ -897,7 +901,7 @@ const AboutSection = memo(function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="w-full max-w-[480px] md:max-w-[550px] lg:max-w-[750px] mx-auto relative z-10 flex flex-col items-center justify-end -mt-12 md:-mt-24 lg:-mt-36 -mb-32 md:-mb-48 lg:-mb-64 min-h-[480px] md:min-h-[550px] lg:min-h-[750px]"
+            className="w-full max-w-[420px] md:max-w-[550px] lg:max-w-[750px] mx-auto relative z-10 flex flex-col items-center justify-end -mt-8 md:-mt-24 lg:-mt-36 -mb-24 md:-mb-48 lg:-mb-64 min-h-[380px] md:min-h-[550px] lg:min-h-[750px]"
           >
             <AnimatePresence mode="popLayout">
               <motion.img
@@ -1053,7 +1057,7 @@ const AboutSection = memo(function AboutSection() {
                       style={{ borderColor: isExpanded ? item.color : undefined }}
                     >
                       <div className="flex items-center justify-between p-6 md:p-8 select-none">
-                        <span className={`text-xl md:text-2xl font-medium tracking-tight transition-colors duration-300 ${isExpanded ? "text-[#1a2a1c] font-bold" : "text-[#2a4020]"}`}>
+                        <span className={`text-lg md:text-2xl font-medium tracking-tight transition-colors duration-300 ${isExpanded ? "text-[#1a2a1c] font-bold" : "text-[#2a4020]"}`}>
                           {item.name}
                         </span>
                         <div

@@ -36,19 +36,19 @@ export default function CTASection() {
           <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 
           <div className="flex justify-center mb-8 relative z-10">
-            <img src="/iron.png" alt="Iron Fuel Lab" className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-full shadow-2xl" />
+            <img src="/logo.png" alt="Iron Fuel Lab" className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-full shadow-2xl" />
           </div>
 
           <BlurText
             text="Optimize Your Output."
             direction="bottom"
-            className="text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 justify-center"
+            className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 justify-center"
           />
           <BlurText
             text="Join thousands of high-performers optimizing their health and potential. Get 15% off your first Iron Fuel Lab protocol."
             direction="bottom"
             delay={300}
-            className="text-lg md:text-xl text-[#9faaa2] mb-10 max-w-2xl mx-auto font-medium justify-center"
+            className="text-base md:text-xl text-[#9faaa2] mb-10 max-w-2xl mx-auto font-medium justify-center"
           />
 
           <form className="max-w-md mx-auto relative group flex gap-2 w-full flex-col sm:flex-row" onSubmit={(e) => e.preventDefault()}>

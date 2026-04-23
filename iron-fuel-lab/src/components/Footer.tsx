@@ -36,17 +36,17 @@ export default function Footer() {
         }}
       />
 
-      <div className="relative max-w-[85rem] mx-auto w-full px-6 md:px-12 pt-20 pb-12">
+      <div className="relative max-w-[85rem] mx-auto w-full px-6 md:px-12 pt-16 pb-10">
 
         {/* ── Main grid ── */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 mb-16">
 
           {/* Brand column */}
           <div className="md:col-span-5">
             {/* Logo */}
             <button onClick={scrollTop} className="cursor-pointer text-left mb-6 flex items-center gap-3 group">
               <img
-                src="/iron.png"
+                src="/logo.png"
                 alt="Iron Fuel Lab"
                 className="w-14 h-14 lg:w-16 lg:h-16 object-contain rounded-full ring-1 ring-white/10 group-hover:ring-[#4ca735]/60 transition-all duration-300"
               />
