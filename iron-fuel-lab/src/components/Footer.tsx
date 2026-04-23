@@ -1,69 +1,166 @@
 import React from 'react';
-import { Instagram, Twitter } from 'lucide-react';
+import { Instagram, Mail, Phone, ShieldCheck, Leaf, Zap } from 'lucide-react';
 
 export default function Footer() {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const badges = [
+    { icon: ShieldCheck, label: 'Third-Party Tested' },
+    { icon: Leaf, label: '100% Vegan' },
+    { icon: Zap, label: 'Made in USA' },
+  ];
+
   return (
-    <footer className="bg-[#0a0f0b] pt-20 pb-12 border-t border-white/10 px-4 md:px-8">
-      <div className="max-w-[85rem] mx-auto w-full">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-16">
-          
-          <div className="col-span-2 md:col-span-1">
-            <h3 className="text-white text-3xl font-black tracking-tighter mb-4 italic uppercase leading-[0.85]">IRON FUEL<br/>LAB.</h3>
-            <p className="text-[#9faaa2] text-xs leading-relaxed mb-6 font-medium max-w-[220px]">
-              Advanced, medical-grade formulas engineered for high-performers seeking absolute peak results.
+    <footer className="relative bg-[#060b07] overflow-hidden">
+
+      {/* ── Ambient glow ── */}
+      <div
+        className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[340px] rounded-full pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at center, rgba(76,167,53,0.12) 0%, transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+      />
+
+      {/* ── Top gradient divider ── */}
+      <div
+        className="w-full h-[2px]"
+        style={{
+          background:
+            'linear-gradient(90deg, transparent 0%, rgba(76,167,53,0.5) 30%, rgba(220,168,83,0.5) 70%, transparent 100%)',
+        }}
+      />
+
+      <div className="relative max-w-[85rem] mx-auto w-full px-6 md:px-12 pt-20 pb-12">
+
+        {/* ── Main grid ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 mb-16">
+
+          {/* Brand column */}
+          <div className="md:col-span-5">
+            {/* Logo */}
+            <button onClick={scrollTop} className="cursor-pointer text-left mb-6 block">
+              <span className="text-4xl lg:text-5xl font-black tracking-tighter italic uppercase leading-none text-white">
+                IRON FUEL<br />LAB.
+              </span>
+            </button>
+
+            <p className="text-[#6b7d6e] text-sm leading-relaxed mb-8 max-w-[320px]">
+              Advanced, medical-grade formulas engineered for high-performers seeking absolute peak results. Backed by science. Built in the USA.
             </p>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              {badges.map(({ icon: Icon, label }) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm"
+                >
+                  <Icon className="w-3.5 h-3.5 text-[#4ca735]" />
+                  <span className="text-[11px] font-semibold text-white/60 tracking-wide">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Social */}
             <div className="flex gap-3">
-              <a href="#" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:bg-white hover:text-black transition-all">
+              <a
+                href="#"
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/40 hover:bg-[#4ca735] hover:text-white hover:border-[#4ca735] transition-all duration-300"
+              >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" className="w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:bg-white hover:text-black transition-all">
-                <Twitter className="w-4 h-4" />
               </a>
             </div>
           </div>
 
-          <div>
-            <h4 className="text-white font-bold tracking-widest uppercase text-[11px] mb-7 text-white/90">Shop</h4>
-            <ul className="space-y-4 text-white/40 text-sm font-medium">
-              <li><button onClick={() => scrollTo('products-section')} className="hover:text-white transition-colors cursor-pointer">All Products</button></li>
-              <li><button onClick={() => scrollTo('products-section')} className="hover:text-white transition-colors cursor-pointer">Performance</button></li>
-              <li><button onClick={() => scrollTo('products-section')} className="hover:text-white transition-colors cursor-pointer">Recovery</button></li>
-              <li><button onClick={() => scrollTo('products-section')} className="hover:text-white transition-colors cursor-pointer">Protocols</button></li>
+          {/* Spacer */}
+          <div className="hidden md:block md:col-span-1" />
+
+          {/* Quick Links */}
+          <div className="md:col-span-3">
+            <h4 className="text-white font-bold tracking-[0.2em] uppercase text-[10px] mb-7 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-[#4ca735] inline-block" />
+              Navigate
+            </h4>
+            <ul className="space-y-4">
+              {[
+                { label: 'Our Products', id: 'products-section' },
+                { label: 'Product Specs', id: 'about-section' },
+                { label: 'Testimonials', id: 'testimonials' },
+                { label: 'FAQ', id: 'faq' },
+              ].map(({ label, id }) => (
+                <li key={id}>
+                  <button
+                    onClick={() => scrollTo(id)}
+                    className="text-white/40 text-sm font-medium hover:text-white transition-colors duration-200 cursor-pointer group flex items-center gap-2"
+                  >
+                    <span className="w-0 group-hover:w-3 h-[1px] bg-[#4ca735] transition-all duration-300 inline-block" />
+                    {label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
-          <div>
-            <h4 className="text-white font-bold tracking-widest uppercase text-[11px] mb-7 text-white/90">Quick Links</h4>
-            <ul className="space-y-4 text-white/40 text-[13px] font-medium">
-              <li><button onClick={() => scrollTo('products-section')} className="hover:text-white transition-colors cursor-pointer">Our Products</button></li>
-              <li><button onClick={() => scrollTo('about-section')} className="hover:text-white transition-colors cursor-pointer">Product Specs</button></li>
-              <li><button onClick={() => scrollTo('testimonials')} className="hover:text-white transition-colors cursor-pointer">Testimonials</button></li>
-              <li><button onClick={() => scrollTo('faq')} className="hover:text-white transition-colors cursor-pointer">FAQ</button></li>
+          {/* Support */}
+          <div className="md:col-span-3">
+            <h4 className="text-white font-bold tracking-[0.2em] uppercase text-[10px] mb-7 flex items-center gap-2">
+              <span className="w-4 h-[1px] bg-[#dca853] inline-block" />
+              Support
+            </h4>
+            <ul className="space-y-4">
+              <li>
+                <button
+                  onClick={() => scrollTo('faq')}
+                  className="text-white/40 text-sm font-medium hover:text-white transition-colors duration-200 cursor-pointer group flex items-center gap-2"
+                >
+                  <span className="w-0 group-hover:w-3 h-[1px] bg-[#dca853] transition-all duration-300 inline-block" />
+                  FAQ
+                </button>
+              </li>
+              <li>
+                <a
+                  href="mailto:support@ironfuellab.com"
+                  className="text-white/40 text-sm font-medium hover:text-white transition-colors duration-200 group flex items-center gap-2"
+                >
+                  <Mail className="w-3.5 h-3.5 text-white/25 group-hover:text-[#dca853] transition-colors duration-200" />
+                  support@ironfuellab.com
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+18005551234"
+                  className="text-white/40 text-sm font-medium hover:text-white transition-colors duration-200 group flex items-center gap-2"
+                >
+                  <Phone className="w-3.5 h-3.5 text-white/25 group-hover:text-[#dca853] transition-colors duration-200" />
+                  +1 (800) 555-1234
+                </a>
+              </li>
             </ul>
           </div>
-
-          <div>
-            <h4 className="text-white font-bold tracking-widest uppercase text-[11px] mb-7 text-white/90">Support</h4>
-            <ul className="space-y-4 text-white/40 text-sm font-medium">
-              <li><button onClick={() => scrollTo('faq')} className="hover:text-white transition-colors cursor-pointer">FAQ</button></li>
-              <li><a href="mailto:support@ironfuellab.com" className="hover:text-white transition-colors">Contact Us</a></li>
-              <li><a href="tel:+18005551234" className="hover:text-white transition-colors">+1 (800) 555-1234</a></li>
-            </ul>
-          </div>
-
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/10 text-white/30 text-xs font-medium gap-4">
-          <p>© {new Date().getFullYear()} Iron Fuel Lab. All rights reserved.</p>
-          <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+        {/* ── Bottom bar ── */}
+        <div
+          className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4"
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+        >
+          <p className="text-white/20 text-xs font-medium">
+            © {new Date().getFullYear()} Iron Fuel Lab. All rights reserved.
+          </p>
+          <div className="flex gap-6 text-white/20 text-xs font-medium">
+            <a href="#" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors duration-200">Terms of Service</a>
+            <a href="#" className="hover:text-white transition-colors duration-200">Refund Policy</a>
           </div>
         </div>
+
       </div>
     </footer>
   );

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { ShoppingBag, ArrowUpRight, Star, ChevronLeft, ChevronRight, ArrowRight, Brain, Leaf, Droplet, Sparkles, ShieldCheck, Zap, CheckCircle2, Menu, X, Instagram, Twitter } from "lucide-react";
+import { ShoppingBag, ArrowUpRight, Star, ChevronLeft, ChevronRight, ArrowRight, Brain, Leaf, Droplet, Sparkles, ShieldCheck, Zap, CheckCircle2, Menu, X, Instagram } from "lucide-react";
 import { useState, useEffect, useMemo, memo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BlurText from "./components/BlurText";
@@ -362,7 +362,7 @@ const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* ── Review / Brand Card ───────────────────────────────── */}
-        <div className="absolute top-[16%] sm:top-[14%] lg:top-[18%] left-4 md:left-6 lg:left-8 z-30 max-w-[260px] sm:max-w-sm lg:max-w-[440px] bg-white/5 backdrop-blur-xl border border-white/20 p-5 sm:p-7 md:p-10 lg:p-12 rounded-3xl sm:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-5">
+        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[240px] sm:max-w-[280px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-4 sm:p-5 md:p-7 rounded-3xl sm:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-4">
           <div className="flex items-center gap-3 md:gap-5">
             <div className="flex -space-x-3 md:-space-x-4">
               <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-9 h-9 sm:w-11 sm:h-11 md:w-14 md:h-14 rounded-full border-[2px] sm:border-[3px] border-[#131514] object-cover shadow-md" />
@@ -477,7 +477,6 @@ const HeroSection = memo(function HeroSection() {
                 </button>
                 <div className="flex justify-center gap-5 pt-2">
                   <Instagram className="w-5 h-5 text-white/30 hover:text-white transition-colors cursor-pointer" />
-                  <Twitter className="w-5 h-5 text-white/30 hover:text-white transition-colors cursor-pointer" />
                 </div>
               </div>
             </motion.div>
