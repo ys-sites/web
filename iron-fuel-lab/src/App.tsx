@@ -251,7 +251,7 @@ const HeroSection = memo(function HeroSection() {
                 alt="Iron Fuel Lab" 
                 className="hidden md:block w-8 h-8 object-contain" 
               />
-              <span className="text-sm md:text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
+              <span className="text-[11px] md:text-[13px] lg:text-base font-black tracking-tighter font-display text-white whitespace-nowrap">
                 IRON FUEL LAB
               </span>
             </div>
@@ -391,25 +391,25 @@ const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* ── Review / Brand Card ───────────────────────────────── */}
-        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[170px] sm:max-w-[240px] md:max-w-[280px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3 sm:p-4 md:p-5 lg:p-7 rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1.5 sm:space-y-3 lg:space-y-4">
-          <div className="flex items-center gap-2 sm:gap-4 lg:gap-5">
-            <div className="flex -space-x-2 sm:-space-x-3 lg:-space-x-4">
-              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-full border-[1px] sm:border-[2px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-full border-[1px] sm:border-[2px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-9 sm:h-9 md:w-11 md:h-11 lg:w-14 lg:h-14 rounded-full border-[1px] sm:border-[2px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+        <div className="absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[150px] sm:max-w-[200px] md:max-w-[240px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-2.5 sm:p-3 md:p-4 lg:p-7 rounded-2xl sm:rounded-[2rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1 sm:space-y-2 lg:space-y-4">
+          <div className="flex items-center gap-1.5 sm:gap-3 lg:gap-5">
+            <div className="flex -space-x-1.5 sm:-space-x-3 lg:-space-x-4">
+              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full border-[1px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full border-[1px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-5 h-5 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-14 lg:h-14 rounded-full border-[1px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
             </div>
             <div>
               <div className="flex gap-0.5 sm:gap-1">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-2 h-2 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-amber-400 fill-current" />
+                  <Star key={i} className="w-1.5 h-1.5 sm:w-3 sm:h-3 md:w-4 md:h-4 lg:w-6 lg:h-6 text-amber-400 fill-current" />
                 ))}
               </div>
-              <div className="text-[9px] sm:text-sm md:text-base lg:text-lg text-white mt-0.5 font-bold font-display leading-tight">
+              <div className="text-[8px] sm:text-[12px] md:text-sm lg:text-lg text-white mt-0.5 font-bold font-display leading-tight">
                 {t.hero.reviews}
               </div>
             </div>
           </div>
-          <p className="text-[8px] sm:text-[13px] md:text-sm lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
+          <p className="text-[7px] sm:text-[11px] md:text-[13px] lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
             {HERO_SLIDES[currentSlide].review[language as keyof typeof HERO_SLIDES[0]["review"]]}
           </p>
         </div>

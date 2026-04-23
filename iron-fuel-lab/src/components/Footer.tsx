@@ -50,11 +50,6 @@ export default function Footer() {
           <div className="md:col-span-5">
             {/* Logo */}
             <button onClick={scrollTop} className="cursor-pointer text-left mb-8 flex flex-col items-start gap-4 group">
-              <img
-                src="/logo.png"
-                alt="Iron Fuel Lab"
-                className="w-32 h-32 lg:w-40 lg:h-40 object-contain rounded-full ring-1 ring-white/10 group-hover:ring-[#4ca735]/60 transition-all duration-300 shadow-2xl"
-              />
               <span className="text-3xl lg:text-4xl font-black tracking-tighter italic uppercase leading-none text-white whitespace-nowrap">
                 IRON FUEL LAB.
               </span>

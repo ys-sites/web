@@ -156,7 +156,7 @@ export default function Testimonials() {
           {[...currentTestimonials, ...currentTestimonials].map((test, index) => (
             <div
               key={index}
-              className="w-[300px] md:w-[380px] shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-3xl p-7 md:p-8 flex flex-col justify-between hover:bg-white/8 hover:border-white/20 transition-all duration-300 shadow-2xl"
+              className="w-[240px] sm:w-[300px] md:w-[380px] shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 flex flex-col justify-between hover:bg-white/8 hover:border-white/20 transition-all duration-300 shadow-2xl"
             >
               <div>
                 <div className="flex gap-1 mb-5">
