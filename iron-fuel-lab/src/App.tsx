@@ -246,7 +246,7 @@ const HeroSection = memo(function HeroSection() {
 
             {/* Brand logo */}
             <div className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none select-none">
-              <img src="/iron.png" alt="Iron Fuel Lab" className="w-9 h-9 md:w-11 md:h-11 object-contain rounded-full" />
+              <img src="/iron.png" alt="Iron Fuel Lab" className="w-10 h-10 md:w-14 md:h-14 object-contain rounded-full shadow-lg" />
               <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter font-display text-white whitespace-nowrap">
                 IRON FUEL LAB.
               </span>

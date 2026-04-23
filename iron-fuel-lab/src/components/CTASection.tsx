@@ -12,14 +12,14 @@ export default function CTASection() {
           src="/Ashwagandha.jpeg"
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-center opacity-40"
+          className="w-full h-full object-cover object-center opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/60" />
       </div>
 
       {/* Background glow effects */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-30">
-        <div className="w-full max-w-4xl h-[400px] bg-gradient-to-r from-[#4ca735]/20 via-transparent to-[#06b6d4]/20 blur-[120px] rounded-full" />
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-20">
+        <div className="w-full max-w-4xl h-[400px] bg-gradient-to-r from-[#4ca735]/20 via-transparent to-[#06b6d4]/20 blur-[60px] rounded-full" />
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10 w-full">
@@ -31,9 +31,13 @@ export default function CTASection() {
           className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-center overflow-hidden"
         >
           {/* Dark overlay to keep text legible */}
-          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/40 pointer-events-none" />
           {/* Subtle noise/texture overlay */}
           <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
+
+          <div className="flex justify-center mb-8 relative z-10">
+            <img src="/iron.png" alt="Iron Fuel Lab" className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-full shadow-2xl" />
+          </div>
 
           <BlurText
             text="Optimize Your Output."
