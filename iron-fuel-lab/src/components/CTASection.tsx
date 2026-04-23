@@ -5,9 +5,20 @@ import BlurText from './BlurText';
 
 export default function CTASection() {
   return (
-    <section className="bg-black py-32 px-4 md:px-8 relative overflow-hidden">
+    <section className="relative py-32 px-4 md:px-8 overflow-hidden bg-black">
+      {/* Full-section background image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/Ashwagandha.jpeg"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+      </div>
+
       {/* Background glow effects */}
-      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center">
+      <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center opacity-30">
         <div className="w-full max-w-4xl h-[400px] bg-gradient-to-r from-[#4ca735]/20 via-transparent to-[#06b6d4]/20 blur-[120px] rounded-full" />
       </div>
 
@@ -17,20 +28,10 @@ export default function CTASection() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="bg-[#111111] border border-white/10 p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-center relative overflow-hidden"
+          className="relative bg-white/[0.03] backdrop-blur-xl border border-white/10 p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-center overflow-hidden"
         >
-          {/* Ashwagandha background image — blurred */}
-          <img
-            src="/Ashwagandha.jpeg"
-            alt=""
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-            style={{ filter: 'blur(4px)', transform: 'scale(1.08)', opacity: 0.75 }}
-          />
           {/* Dark overlay to keep text legible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/55 pointer-events-none" />
+          <div className="absolute inset-0 bg-black/20 pointer-events-none" />
           {/* Subtle noise/texture overlay */}
           <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 
