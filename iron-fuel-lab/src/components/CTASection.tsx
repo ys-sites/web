@@ -27,10 +27,10 @@ export default function CTASection() {
             loading="lazy"
             decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-            style={{ filter: 'blur(6px)', transform: 'scale(1.08)', opacity: 0.35 }}
+            style={{ filter: 'blur(4px)', transform: 'scale(1.08)', opacity: 0.75 }}
           />
           {/* Dark overlay to keep text legible */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/55 pointer-events-none" />
           {/* Subtle noise/texture overlay */}
           <div className="absolute inset-0 opacity-10 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E")' }}></div>
 

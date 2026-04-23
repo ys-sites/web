@@ -44,8 +44,13 @@ export default function Footer() {
           {/* Brand column */}
           <div className="md:col-span-5">
             {/* Logo */}
-            <button onClick={scrollTop} className="cursor-pointer text-left mb-6 block">
-              <span className="text-4xl lg:text-5xl font-black tracking-tighter italic uppercase leading-none text-white">
+            <button onClick={scrollTop} className="cursor-pointer text-left mb-6 flex items-center gap-3 group">
+              <img
+                src="/iron.png"
+                alt="Iron Fuel Lab"
+                className="w-12 h-12 lg:w-14 lg:h-14 object-contain rounded-full ring-1 ring-white/10 group-hover:ring-[#4ca735]/60 transition-all duration-300"
+              />
+              <span className="text-3xl lg:text-4xl font-black tracking-tighter italic uppercase leading-none text-white">
                 IRON FUEL<br />LAB.
               </span>
             </button>
@@ -115,15 +120,7 @@ export default function Footer() {
               Support
             </h4>
             <ul className="space-y-4">
-              <li>
-                <button
-                  onClick={() => scrollTo('faq')}
-                  className="text-white/40 text-sm font-medium hover:text-white transition-colors duration-200 cursor-pointer group flex items-center gap-2"
-                >
-                  <span className="w-0 group-hover:w-3 h-[1px] bg-[#dca853] transition-all duration-300 inline-block" />
-                  FAQ
-                </button>
-              </li>
+
               <li>
                 <a
                   href="mailto:support@ironfuellab.com"

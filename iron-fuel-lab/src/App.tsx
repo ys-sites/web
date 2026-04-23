@@ -245,8 +245,11 @@ const HeroSection = memo(function HeroSection() {
             </nav>
 
             {/* Brand logo */}
-            <div className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter absolute left-1/2 -translate-x-1/2 text-center z-50 font-display text-white whitespace-nowrap pointer-events-none select-none">
-              IRON FUEL LAB.
+            <div className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2 text-center z-50 pointer-events-none select-none">
+              <img src="/iron.png" alt="Iron Fuel Lab" className="w-7 h-7 md:w-9 md:h-9 object-contain rounded-full" />
+              <span className="text-lg md:text-2xl lg:text-3xl font-black tracking-tighter font-display text-white whitespace-nowrap">
+                IRON FUEL LAB.
+              </span>
             </div>
 
             {/* Right actions */}
@@ -442,9 +445,12 @@ const HeroSection = memo(function HeroSection() {
             >
               {/* Menu header */}
               <div className="flex items-center justify-between mb-10">
-                <span className="text-white text-xl font-black tracking-tighter font-display">
-                  IRON FUEL LAB.
-                </span>
+                <div className="flex items-center gap-2">
+                  <img src="/iron.png" alt="Iron Fuel Lab" className="w-7 h-7 object-contain rounded-full" />
+                  <span className="text-white text-xl font-black tracking-tighter font-display">
+                    IRON FUEL LAB.
+                  </span>
+                </div>
                 <button
                   onClick={closeMobileMenu}
                   className="p-2 rounded-full bg-white/5 hover:bg-white/15 text-white/60 hover:text-white transition-colors"
