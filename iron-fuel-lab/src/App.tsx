@@ -365,7 +365,7 @@ const HeroSection = memo(function HeroSection() {
                 animateBy="words"
                 highlightWord={t.hero[slide.highlightWord.toLowerCase() as keyof typeof t.hero] || slide.highlightWord}
                 highlightColor={slide.highlightColor}
-                className="text-[2.4rem] sm:text-[2.5rem] md:text-[1.3rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
+                className="text-[2.4rem] sm:text-[2.5rem] md:text-[0.65rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
               />
             </div>
           ))}
