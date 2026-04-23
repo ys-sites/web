@@ -30,7 +30,9 @@ export const translations = {
       energy: "ENERGY",
       core: "CORE",
       restore: "RESTORE",
-      balance: "BALANCE"
+      balance: "BALANCE",
+      sleep: "SLEEP",
+      return: "RETURN"
     },
     products: {
       title: "OUR PRODUCTS",
@@ -119,7 +121,9 @@ export const translations = {
       energy: "ÉNERGIE",
       core: "CŒUR",
       restore: "RESTAURER",
-      balance: "ÉQUILIBRE"
+      balance: "ÉQUILIBRE",
+      sleep: "SOMMEIL",
+      return: "RETOUR"
     },
     products: {
       title: "NOS PRODUITS",
