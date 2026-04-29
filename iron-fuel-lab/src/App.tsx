@@ -354,7 +354,7 @@ const HeroSection = memo(function HeroSection() {
           {HERO_SLIDES.map((slide, index) => (
             <div
               key={`title-${slide.id}`}
-              className={`absolute top-[22%] sm:top-[32%] md:top-[35%] lg:top-[38%] left-4 md:left-8 flex flex-col z-0 transition-opacity duration-700 ${
+              className={`absolute top-[22%] sm:top-[32%] md:top-[12%] lg:top-[38%] left-4 md:left-8 flex flex-col z-0 transition-opacity duration-700 ${
                 currentSlide === index ? "opacity-100" : "opacity-0"
               }`}
             >
@@ -365,7 +365,7 @@ const HeroSection = memo(function HeroSection() {
                 animateBy="words"
                 highlightWord={t.hero[slide.highlightWord.toLowerCase() as keyof typeof t.hero] || slide.highlightWord}
                 highlightColor={slide.highlightColor}
-                className="text-[2.4rem] sm:text-[2.5rem] md:text-[0.65rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
+                className="text-[2.4rem] sm:text-[2.5rem] md:text-[1.3rem] lg:text-[6.5rem] font-black font-display leading-[0.9] tracking-tighter drop-shadow-xl text-left text-white flex flex-col"
               />
             </div>
           ))}
@@ -389,25 +389,25 @@ const HeroSection = memo(function HeroSection() {
         </div>
 
         {/* ── Review / Brand Card ───────────────────────────────── */}
-        <div className="hidden sm:block absolute top-[14%] sm:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[180px] sm:max-w-[180px] md:max-w-[68px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3.5 sm:p-3 md:p-[5.6px] lg:p-7 rounded-2xl sm:rounded-[2rem] md:rounded-[0.5rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1.5 sm:space-y-1.5 md:space-y-[3.2px] lg:space-y-4">
-          <div className="flex items-center gap-2 sm:gap-2.5 md:gap-1 lg:gap-5">
-            <div className="flex -space-x-2 sm:-space-x-2.5 md:-space-x-[3.2px] lg:-space-x-4">
-              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-[11.2px] md:h-[11.2px] lg:w-14 lg:h-14 rounded-full border-[1.5px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-[11.2px] md:h-[11.2px] lg:w-14 lg:h-14 rounded-full border-[1.5px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
-              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-[11.2px] md:h-[11.2px] lg:w-14 lg:h-14 rounded-full border-[1.5px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+        <div className="hidden sm:block absolute top-[14%] sm:top-[12%] md:top-[12%] lg:top-[16%] right-4 md:right-6 lg:right-8 z-30 max-w-[180px] sm:max-w-[180px] md:max-w-[85px] lg:max-w-[340px] bg-white/5 backdrop-blur-xl border border-white/20 p-3.5 sm:p-3 md:p-[7px] lg:p-7 rounded-2xl sm:rounded-[2rem] md:rounded-[0.625rem] lg:rounded-[2.5rem] shadow-[0_8px_48px_0_rgba(0,0,0,0.4)] space-y-1.5 sm:space-y-1.5 md:space-y-1 lg:space-y-4">
+          <div className="flex items-center gap-2 sm:gap-2.5 md:gap-[5px] lg:gap-5">
+            <div className="flex -space-x-2 sm:-space-x-2.5 md:-space-x-1 lg:-space-x-4">
+              <img src="https://i.pravatar.cc/100?img=11" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-3.5 md:h-3.5 lg:w-14 lg:h-14 rounded-full border-[1.5px] md:border-[0.75px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=12" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-3.5 md:h-3.5 lg:w-14 lg:h-14 rounded-full border-[1.5px] md:border-[0.75px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
+              <img src="https://i.pravatar.cc/100?img=13" alt="" loading="lazy" decoding="async" className="w-6 h-6 sm:w-7 sm:h-7 md:w-3.5 md:h-3.5 lg:w-14 lg:h-14 rounded-full border-[1.5px] md:border-[0.75px] lg:border-[3px] border-[#131514] object-cover shadow-md" />
             </div>
             <div>
-              <div className="flex gap-0.5 sm:gap-1">
+              <div className="flex gap-0.5 sm:gap-1 md:gap-[1.25px]">
                 {[1, 2, 3, 4, 5].map((i) => (
-                  <Star key={i} className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-[4.8px] md:h-[4.8px] lg:w-6 lg:h-6 text-amber-400 fill-current" />
+                  <Star key={i} className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-1.5 md:h-1.5 lg:w-6 lg:h-6 text-amber-400 fill-current" />
                 ))}
               </div>
-              <div className="text-[10px] sm:text-[11px] md:text-[3.6px] lg:text-lg text-white mt-0.5 font-bold font-display leading-tight">
+              <div className="text-[10px] sm:text-[11px] md:text-[4.5px] lg:text-lg text-white mt-0.5 md:mt-[0.125rem] font-bold font-display leading-tight">
                 {t.hero.reviews}
               </div>
             </div>
           </div>
-          <p className="text-[9px] sm:text-[10px] md:text-[3.52px] lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed font-semibold">
+          <p className="text-[9px] sm:text-[10px] md:text-[4.4px] lg:text-[1.1rem] text-white/85 leading-tight sm:leading-relaxed md:leading-tight font-semibold">
             {HERO_SLIDES[currentSlide].review[language as keyof typeof HERO_SLIDES[0]["review"]]}
           </p>
         </div>
